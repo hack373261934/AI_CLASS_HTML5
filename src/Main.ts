@@ -139,7 +139,6 @@ class Main extends eui.UILayer {
         let view = new ConnectTopic()
         view.x = (this.stage.stageWidth - view.width ) / 2;
         this.addChild(view);
-        console.log(view.x);
 
     }
     /**
