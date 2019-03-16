@@ -178,7 +178,7 @@ var ConnectTopic = (function (_super) {
                 else {
                     console.log('连接到了错误答案!');
                     this.updateMaskState(this.activeQuestionItem.maskLayer, MASKSTATE.ERROR);
-                    this.updateMaskState(content_1.maskLayer, MASKSTATE.ERROR);
+                    !content_1.isConnected && this.updateMaskState(content_1.maskLayer, MASKSTATE.ERROR);
                     this.activeLine.source = 'line_error_png';
                     setTimeout(function () {
                         _this.cancelActiveLine(content_1);
@@ -199,8 +199,7 @@ var ConnectTopic = (function (_super) {
         this.activeLine = null;
         // 边框也要消失
         this.updateMaskState(this.activeQuestionItem.maskLayer, this.activeQuestionItem.currentMaskState);
-        console.log(ansItem);
-        ansItem && this.updateMaskState(ansItem.maskLayer, ansItem.currentMaskState);
+        ansItem && !ansItem.isConnected && this.updateMaskState(ansItem.maskLayer, ansItem.currentMaskState);
     };
     // 根据两个点来动态更新activeLine
     ConnectTopic.prototype.updateActiveLine = function (curX, curY) {
