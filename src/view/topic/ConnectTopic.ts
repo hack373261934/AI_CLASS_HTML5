@@ -320,8 +320,6 @@ class ConnectTopic extends eui.Component implements eui.UIComponent {
 			let ansItemIndex = this.config[this.activeQuestionItem.name];
 			let ansItem = <ConTopicAnsItem>this.answerGroup.getChildAt(ansItemIndex);
 			// 计算出斜率
-
-
 			let endPointX = ansItem.localToGlobal().x + ansItem.width / 2;
 			let endPointY = ansItem.localToGlobal().y;
 			this.slope = (this.startPointOfLine.y - endPointY) / (this.startPointOfLine.x - endPointX);
