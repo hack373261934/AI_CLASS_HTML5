@@ -182,6 +182,14 @@ var ui;
                     _this.view.GroupBox.addChild(_this.view.classTI);
                     _this.view.classTI.x = 0;
                     _this.view.classTI.y = 0;
+                    if (GloableData.quizsData.data.quizs[GloableData.classMax].quizType == 2) {
+                        var viewTopic = new ConnectTopic();
+                        viewTopic.width = _this.view.width;
+                        viewTopic.height = _this.view.height;
+                        viewTopic.x = 0;
+                        _this.view.addChild(viewTopic);
+                        return;
+                    }
                 }, this, RES.ResourceItem.TYPE_IMAGE);
                 // //画一个转场背景图
                 // this.imgBg = new egret.Bitmap();

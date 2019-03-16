@@ -118,9 +118,7 @@ module ui {
         private init(event: egret.Event): void {
             var data = event.target.data;
             GloableData.quizsData = JSON.parse(data);
-            // GloableData.classMax=GloableData.quizsData.data.quizs.length;
-            this._zhuanshi = new MovieClip("testmc_json", "testmc_png", "bai", -1, 0, 0);
-            this.AniGroup.addChild(this._zhuanshi);
+            // GloableData.classMax=GloableData.quizsData.data.quizs.lengt
 
             if (GloableData.deviceType != "Pc") {
                 //-----创建背景对象
