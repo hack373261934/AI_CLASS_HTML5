@@ -10,7 +10,9 @@ class ConnectTopic extends eui.Component implements eui.UIComponent {
 	public lineGroup: eui.Group;
 	public timeLabel: eui.Label;
 	public publishBtn: eui.Button;
-	public deviceType=GloableData.deviceType;
+	public publishGroup: eui.Group;
+
+	public deviceType = GloableData.deviceType;
 	// 当前游戏的答案拍下来
 	private config;
 
@@ -25,8 +27,12 @@ class ConnectTopic extends eui.Component implements eui.UIComponent {
 	// 连线的斜率
 	private slope = 1;
 
+	// 数据
+	private data;
+
 	public constructor(data) {
 		super();
+		this.data = data;
 		this.skinName = 'ConnectTopicSkin';
 	}
 	protected partAdded(partName: string, instance: any): void {
@@ -44,16 +50,27 @@ class ConnectTopic extends eui.Component implements eui.UIComponent {
 
 	private init() {
 		// 配置文件
-		let config = [2, 0, 1];
-		this.config = config;
+		this.config = [];
+		let answerObj = JSON.parse(this.data.answer).answer;
+		for (let key in answerObj) {
+			this.config[key] = answerObj[key];
+		}
 		// 图片资源(后续为url获取);
-		let questionImgArr = ['fan', 'cab', 'hat'];
-		let answerImgArr = ['ff', 'hh', 'cc'];
-		for (let i: number = 0; i < config.length; i++) {
+		let questionImgArr = [];
+		for (let i: number = 0; i < this.data.upQuizItems.length; i++) {
+			questionImgArr.push(this.data.upQuizItems[i].mediaUrl);
+		}
+		let answerImgArr = [];
+		for (let i: number = 0; i < this.data.downQuizItems.length; i++) {
+			answerImgArr.push(this.data.downQuizItems[i].mediaUrl);
+		}
+		for (let i: number = 0; i < this.config.length; i++) {
 			// 简历问题与答案之间的索引关系
-			this.questionGroup.getChildAt(i).name = this.answerGroup.getChildAt(config[i]).name = i.toString();
-			(<ConTopicQusItem>this.questionGroup.getChildAt(i)).bgImg.source = questionImgArr[i] + '_png';
-			(<ConTopicAnsItem>this.answerGroup.getChildAt(i)).bgImg.source = answerImgArr[i] + '_png';
+			this.questionGroup.getChildAt(i).name = this.answerGroup.getChildAt(this.config[i]).name = i.toString();
+			(<ConTopicQusItem>this.questionGroup.getChildAt(i)).bgImg.source = questionImgArr[i];
+			(<ConTopicAnsItem>this.answerGroup.getChildAt(i)).bgImg.source = answerImgArr[i];
+			// 激活按钮的显示逻辑
+			(<ConTopicQusItem>this.questionGroup.getChildAt(i)).activeBtn.visible = this.deviceType == 'Pc';
 		}
 	}
 
@@ -75,6 +92,22 @@ class ConnectTopic extends eui.Component implements eui.UIComponent {
 			btn.visible = false;
 			// 激活题目
 			this.activeQuestionItem = <ConTopicQusItem>btn.parent;
+			// 显示public group
+			this.publishGroup.visible = true;
+			// 先让publish按钮enabled
+			this.publishBtn.enabled = false;
+			// 更新倒计时
+			let num = Math.floor(this.data.upQuizItems[this.activeQuestionItem.name].duration / 1000);
+			this.timeLabel.text = num + 's';
+			let interval = 1000;
+			let t = setInterval(() => {
+				num -= 1;
+				this.timeLabel.text = num + 's';
+				if (num <= 0) {
+					this.publishBtn.enabled = true;
+					clearInterval(t);
+				}
+			}, interval);
 			// 记录起始点
 			// 起点坐标(舞台坐标系)
 			let point = this.activeQuestionItem.localToGlobal();
@@ -103,11 +136,6 @@ class ConnectTopic extends eui.Component implements eui.UIComponent {
 	}
 	//
 	private stageBeginHandler(e: egret.TouchEvent | { target: any }) {
-
-		// console.log(e.stageX, e.stageY);
-		// console.log(e);
-
-
 		// 如果没有题目被激活,则不进行以下逻辑
 		if (!this.activeQuestionItem) {
 			return;
@@ -140,7 +168,7 @@ class ConnectTopic extends eui.Component implements eui.UIComponent {
 		}
 
 	}
-	private stageEndHandler(e: egret.TouchEvent | {target: any}) {
+	private stageEndHandler(e: egret.TouchEvent | { target: any }) {
 		if (this.isValidStart) {
 			let content = e.target.parent;
 			if (content instanceof ConTopicAnsItem) {
@@ -180,6 +208,10 @@ class ConnectTopic extends eui.Component implements eui.UIComponent {
 					this.activeLine.source = 'line_right_png';
 					// 重置绘制线段(优化方案: 放在激活逻辑里去);
 					this.activeLine = null;
+					// 隐藏publish group 
+					this.publishGroup.visible = false;
+					// 重置this.activeQuestionItem
+					this.activeQuestionItem = null;
 				} else {
 					console.log('连接到了错误答案!');
 					this.updateMaskState(this.activeQuestionItem.maskLayer, MASKSTATE.ERROR);
@@ -310,7 +342,7 @@ class ConnectTopic extends eui.Component implements eui.UIComponent {
 	// 发布答案按钮的逻辑
 	private publishBtnTapHandler(e: egret.TouchEvent) {
 		if (this.activeQuestionItem) {
-			console.log(111);
+			// console.log(111);
 			// 先触发激活按钮
 			// this.activeQuestionItem.activeBtn.disp
 			// 触发touchbegin
@@ -322,21 +354,21 @@ class ConnectTopic extends eui.Component implements eui.UIComponent {
 			// 计算出斜率
 			let endPointX = ansItem.localToGlobal().x + ansItem.width / 2;
 			let endPointY = ansItem.localToGlobal().y;
-			this.slope = (this.startPointOfLine.y - endPointY) / (this.startPointOfLine.x - endPointX);
-			egret.Tween.get(this).to({ publishDistance: endPointX }, 800).call(() => {
+			this.slope =  (this.startPointOfLine.x - endPointX) / (this.startPointOfLine.y - endPointY);
+			console.log(this.publishDistance);
+			egret.Tween.get(this).to({ publishDistance: endPointY }, 800).call(() => {
 				console.log('publish连线完成');
-				this.stageEndHandler({target: ansItem.bgImg})
+				this.stageEndHandler({ target: ansItem.bgImg })
 			})
 		}
 	}
 
 	public get publishDistance(): number {
-		return this.activeQuestionItem ? (this.activeQuestionItem.localToGlobal().x + this.activeQuestionItem.width / 2) : 0;
+		return this.activeQuestionItem ? this.startPointOfLine.y : 0;
 	}
 	public set publishDistance(value: number) {
-		let y1 = this.slope * (value - this.startPointOfLine.x);
-		this.stageMoveHandler({ stageX: value, stageY: y1 + this.startPointOfLine.y });
-		console.log(value,this.slope,  this.slope * value);
+		let x1 = (value - this.startPointOfLine.y) * this.slope;
+		this.stageMoveHandler({ stageX: x1 + this.startPointOfLine.x, stageY: value });
 	}
 
 }

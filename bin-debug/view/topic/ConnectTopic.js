@@ -25,6 +25,7 @@ var ConnectTopic = (function (_super) {
         _this.startPointOfLine = new egret.Point();
         // 连线的斜率
         _this.slope = 1;
+        _this.data = data;
         _this.skinName = 'ConnectTopicSkin';
         return _this;
     }
@@ -40,16 +41,27 @@ var ConnectTopic = (function (_super) {
     };
     ConnectTopic.prototype.init = function () {
         // 配置文件
-        var config = [2, 0, 1];
-        this.config = config;
+        this.config = [];
+        var answerObj = JSON.parse(this.data.answer).answer;
+        for (var key in answerObj) {
+            this.config[key] = answerObj[key];
+        }
         // 图片资源(后续为url获取);
-        var questionImgArr = ['fan', 'cab', 'hat'];
-        var answerImgArr = ['ff', 'hh', 'cc'];
-        for (var i = 0; i < config.length; i++) {
+        var questionImgArr = [];
+        for (var i = 0; i < this.data.upQuizItems.length; i++) {
+            questionImgArr.push(this.data.upQuizItems[i].mediaUrl);
+        }
+        var answerImgArr = [];
+        for (var i = 0; i < this.data.downQuizItems.length; i++) {
+            answerImgArr.push(this.data.downQuizItems[i].mediaUrl);
+        }
+        for (var i = 0; i < this.config.length; i++) {
             // 简历问题与答案之间的索引关系
-            this.questionGroup.getChildAt(i).name = this.answerGroup.getChildAt(config[i]).name = i.toString();
-            this.questionGroup.getChildAt(i).bgImg.source = questionImgArr[i] + '_png';
-            this.answerGroup.getChildAt(i).bgImg.source = answerImgArr[i] + '_png';
+            this.questionGroup.getChildAt(i).name = this.answerGroup.getChildAt(this.config[i]).name = i.toString();
+            this.questionGroup.getChildAt(i).bgImg.source = questionImgArr[i];
+            this.answerGroup.getChildAt(i).bgImg.source = answerImgArr[i];
+            // 激活按钮的显示逻辑
+            this.questionGroup.getChildAt(i).activeBtn.visible = this.deviceType == 'Pc';
         }
     };
     ConnectTopic.prototype.addListener = function () {
@@ -70,6 +82,22 @@ var ConnectTopic = (function (_super) {
             btn.visible = false;
             // 激活题目
             this.activeQuestionItem = btn.parent;
+            // 显示public group
+            this.publishGroup.visible = true;
+            // 先让publish按钮enabled
+            this.publishBtn.enabled = false;
+            // 更新倒计时
+            var num_1 = Math.floor(this.data.upQuizItems[this.activeQuestionItem.name].duration / 1000);
+            this.timeLabel.text = num_1 + 's';
+            var interval = 1000;
+            var t_1 = setInterval(function () {
+                num_1 -= 1;
+                _this.timeLabel.text = num_1 + 's';
+                if (num_1 <= 0) {
+                    _this.publishBtn.enabled = true;
+                    clearInterval(t_1);
+                }
+            }, interval);
             // 记录起始点
             // 起点坐标(舞台坐标系)
             var point = this.activeQuestionItem.localToGlobal();
@@ -101,8 +129,6 @@ var ConnectTopic = (function (_super) {
     };
     //
     ConnectTopic.prototype.stageBeginHandler = function (e) {
-        // console.log(e.stageX, e.stageY);
-        // console.log(e);
         // 如果没有题目被激活,则不进行以下逻辑
         if (!this.activeQuestionItem) {
             return;
@@ -175,6 +201,10 @@ var ConnectTopic = (function (_super) {
                     this.activeLine.source = 'line_right_png';
                     // 重置绘制线段(优化方案: 放在激活逻辑里去);
                     this.activeLine = null;
+                    // 隐藏publish group 
+                    this.publishGroup.visible = false;
+                    // 重置this.activeQuestionItem
+                    this.activeQuestionItem = null;
                 }
                 else {
                     console.log('连接到了错误答案!');
@@ -301,7 +331,7 @@ var ConnectTopic = (function (_super) {
     ConnectTopic.prototype.publishBtnTapHandler = function (e) {
         var _this = this;
         if (this.activeQuestionItem) {
-            console.log(111);
+            // console.log(111);
             // 先触发激活按钮
             // this.activeQuestionItem.activeBtn.disp
             // 触发touchbegin
@@ -313,8 +343,9 @@ var ConnectTopic = (function (_super) {
             // 计算出斜率
             var endPointX = ansItem_1.localToGlobal().x + ansItem_1.width / 2;
             var endPointY = ansItem_1.localToGlobal().y;
-            this.slope = (this.startPointOfLine.y - endPointY) / (this.startPointOfLine.x - endPointX);
-            egret.Tween.get(this).to({ publishDistance: endPointX }, 800).call(function () {
+            this.slope = (this.startPointOfLine.x - endPointX) / (this.startPointOfLine.y - endPointY);
+            console.log(this.publishDistance);
+            egret.Tween.get(this).to({ publishDistance: endPointY }, 800).call(function () {
                 console.log('publish连线完成');
                 _this.stageEndHandler({ target: ansItem_1.bgImg });
             });
@@ -322,12 +353,11 @@ var ConnectTopic = (function (_super) {
     };
     Object.defineProperty(ConnectTopic.prototype, "publishDistance", {
         get: function () {
-            return this.activeQuestionItem ? (this.activeQuestionItem.localToGlobal().x + this.activeQuestionItem.width / 2) : 0;
+            return this.activeQuestionItem ? this.startPointOfLine.y : 0;
         },
         set: function (value) {
-            var y1 = this.slope * (value - this.startPointOfLine.x);
-            this.stageMoveHandler({ stageX: value, stageY: y1 + this.startPointOfLine.y });
-            console.log(value, this.slope, this.slope * value);
+            var x1 = (value - this.startPointOfLine.y) * this.slope;
+            this.stageMoveHandler({ stageX: x1 + this.startPointOfLine.x, stageY: value });
         },
         enumerable: true,
         configurable: true
