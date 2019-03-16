@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="StuViewSkin" width="2340" height="1080" xmlns:e="http://ns.egret.com/eui"
+        xmlns:w="http://ns.egret.com/wing">
+	<w:Config id="16975f92f27"/>
+	<e:Image id="classBG" width="2340" x="0" height="1080" y="0" fillMode="scale" source=""/>
+	<e:Group id="GroupBox" width="1856" height="1080" x="0" y="0"></e:Group>
+	<e:Group id="AniGroup" left="0" right="0" top="0" bottom="0">
+		<e:Image width="260" height="60" y="994" anchorOffsetX="0" anchorOffsetY="0" source="logo_png" x="2080"/>
+	</e:Group>
+	<e:Group id="EvenGroup" width="1856" height="1080" y="0" x="0" visible="false">
+		<e:Button id="BtnPrev" label="上一题"  enabled="false" height="50" y="1000" left="70"/>
+		<e:Button id="BtnAni" label="播放动画" enabled="true" width="100" x="1686" height="50" y="55"/>
+		<e:Button id="BtnNext" label="下一题"  y="1000" x="1686"/>
+		<e:Button id="pan_01" label="" height="50" width="100" x="1686" y="111">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="hong_png"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="pan_02" label="" width="100" x="1686" height="50" y="164">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="huang_png"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="pan_03" label="" width="100" x="1686" height="50" y="217">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="lan_png"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="BtnClearPan" label="清除画笔" enabled="false" height="50" width="100" y="270" horizontalCenter="808" right="70"/>
+	</e:Group>
+	<e:Group id="PenGroup" width="1856" height="1080" y="0" x="0" anchorOffsetX="0" anchorOffsetY="0" visible="false"/>
+	<e:Group id="DialogGroup" width="1856" x="0" height="1080" y="0">
+		<e:Rect width="784" height="401.52" anchorOffsetX="0" anchorOffsetY="0" strokeAlpha="0" fillColor="0xffffff" ellipseWidth="20" ellipseHeight="20" x="536" y="339"/>
+		<e:Label id="TimerLable" text="" y="385.76" anchorOffsetX="0" width="550" anchorOffsetY="0" height="154" textColor="0x000000" size="122" fontFamily="Verdana" textAlign="center" verticalAlign="middle" x="653"/>
+		<e:Button id="BtnStart" label="Start" anchorOffsetX="0" width="240" anchorOffsetY="0" height="100" y="572.73" x="804" enabled="true" visible="false">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="btnbg_png"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+	</e:Group>
+	<e:Rect id="_teacher" top="12" verticalCenter="-355.5" bottom="723" left="1868" horizontalCenter="928" right="12" fillAlpha="0"/>
+	<e:Rect id="_student" left="1868" horizontalCenter="928" right="12" top="369" verticalCenter="1.5" bottom="366" fillAlpha="0"/>
+</e:Skin>

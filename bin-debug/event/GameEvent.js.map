@@ -1,0 +1,1 @@
+{"version":3,"file":"GameEvent.js","sourceRoot":"","sources":["../../src/event/GameEvent.ts"],"names":[],"mappings":";;;;;;;;;;AACA;IAAwB,6BAAW;IAE/B,mBAAmB,IAAY,EAAC,SAAe,EAAE,OAAiB,EAAE,UAAoB;QAAxF,YACI,kBAAM,IAAI,EAAC,OAAO,EAAC,UAAU,CAAC,SAEjC;QADG,KAAI,CAAC,SAAS,GAAC,SAAS,CAAC;;IAC7B,CAAC;IAEL,gBAAC;AAAD,CAAC,AAPD,CAAwB,KAAK,CAAC,KAAK,GAOlC;AAPK,UAAA,SAAS,wBAOd,CAAA"}
