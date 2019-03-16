@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="ConnectTopicSkin" width="1920" height="1080" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<e:Rect left="0" right="0" top="0" bottom="0" fillColor="0xffffff"/>
+	<e:Rect id="maskLayer" left="0" right="0" top="0" bottom="0" fillAlpha="0.5" visible="false"/>
+	<e:Group id="questionGroup" width="1098" y="276" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="0" touchThrough="true" touchChildren="true">
+		<ns1:ConTopicQusItem width="260" height="260" x="183" y="-1" anchorOffsetX="0" anchorOffsetY="0" name="0"/>
+		<ns1:ConTopicQusItem width="260" height="260" x="115" y="61" anchorOffsetX="0" anchorOffsetY="0" name="1"/>
+		<ns1:ConTopicQusItem width="260" height="260" x="125" y="71" anchorOffsetX="0" anchorOffsetY="0" name="2"/>
+		<e:layout>
+			<e:HorizontalLayout horizontalAlign="center" gap="90"/>
+		</e:layout>
+	</e:Group>
+	<e:Group id="answerGroup" width="1098" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="0" bottom="164">
+		<ns1:ConTopicAnsItem width="260" height="260" x="150" y="36.5"/>
+		<ns1:ConTopicAnsItem width="260" height="260" x="474" y="36.5"/>
+		<ns1:ConTopicAnsItem width="260" height="260" x="774" y="36.5"/>
+		<e:layout>
+			<e:HorizontalLayout gap="90" horizontalAlign="center"/>
+		</e:layout>
+	</e:Group>
+	<e:Group id="lineGroup" width="1102" height="120" y="533.97" anchorOffsetX="0" anchorOffsetY="0" x="409.91"/>
+	<e:Group id="tipsGroup" width="252" height="56" y="128" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="0">
+		<e:Rect width="132" x="0" height="56" y="0" ellipseWidth="60" ellipseHeight="60" fillColor="0x323232"/>
+		<e:Image source="icon_clock_png" x="24" width="32" height="36" verticalCenter="0"/>
+		<e:Label id="timeLabel" text="0s" x="69" verticalAlign="middle" height="50" verticalCenter="0"/>
+		<e:Button id="publishBtn" label="" width="100" height="48" verticalCenter="0" right="0">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="btn_pubish_png"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+	</e:Group>
+</e:Skin>

@@ -50,5 +50,11 @@ declare module skins{
 	class VSliderSkin extends eui.Skin{
 	}
 }
+declare class ConnectTopicSkin extends eui.Skin{
+}
+declare class ConTopicAnsItemSkin extends eui.Skin{
+}
+declare class ConTopicQusItemSkin extends eui.Skin{
+}
 declare class StuViewSkin extends eui.Skin{
 }

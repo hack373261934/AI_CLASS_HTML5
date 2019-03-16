@@ -47,4 +47,3 @@ var EventData;
         eventID[eventID["point"] = 20004] = "point";
     })(eventID = EventData.eventID || (EventData.eventID = {}));
 })(EventData || (EventData = {}));
-//# sourceMappingURL=GloableData.js.map

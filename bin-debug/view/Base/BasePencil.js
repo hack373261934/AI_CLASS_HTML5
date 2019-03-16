@@ -142,4 +142,3 @@ var Pencil = (function (_super) {
     return Pencil;
 }(egret.DisplayObjectContainer));
 __reflect(Pencil.prototype, "Pencil");
-//# sourceMappingURL=BasePencil.js.map

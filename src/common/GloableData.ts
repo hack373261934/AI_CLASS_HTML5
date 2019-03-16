@@ -14,7 +14,7 @@ class GloableData {
     *方便执行同步环境下的逻辑
     *默认为true=真机调试  false=本地调试
     */
-    public static isDebug: boolean = true;
+    public static isDebug: boolean = false;
 
     /* 
     *课件数据
