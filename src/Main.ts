@@ -100,40 +100,49 @@ class Main extends eui.UILayer {
      * Create scene interface
      */
     protected createGameScene(): void {
-        AppFacade.getInstance().startUp();
-        var teacher;
-        var viewWidth = window.innerWidth;
-        var viewHeight = window.innerHeight;
-        console.log(viewWidth + "----" + viewHeight);
-        var _self = this;
-        if (GloableData.isDebug==true) {
-            getNativeEnvVal(function (data) {
-                if (data) {
-                    console.log(data);
-                    teacher = data;
-                    //teacher = JSON.parse(data);
-                }
-                var viewWidthheight = window.innerWidth / window.innerHeight;
-                console.log("00000000------" + viewWidthheight)
-                if (teacher.os == "windows") {
-                    GloableData.deviceType = "Pc";
-                } else {
-                    if (parseFloat(viewWidthheight.toFixed(2)) <= parseFloat((16 / 9).toFixed(2)) && parseFloat(viewWidthheight.toFixed(2)) > parseFloat((4 / 3).toFixed(2))) {
-                        GloableData.deviceType = "Pad";
-                        console.log("0000000-----Pad")
-                    } else if (parseFloat(viewWidthheight.toFixed(2)) > parseFloat((16 / 9).toFixed(2))) {
-                        GloableData.deviceType = "Mobile";
-                        console.log("000000------mobile")
-                    }
-                }
-                _self.addChild(MainUIView.getInstance());
-                MainUIView.getInstance().showView(new ui.MainView(), ui.MainViewMediator.NAME, true);
-            }, this);
-        } else {
-            GloableData.deviceType="Pc"
-            _self.addChild(MainUIView.getInstance());
-            MainUIView.getInstance().showView(new ui.MainView(), ui.MainViewMediator.NAME, true);
-        }
+
+        let view = new ConnectTopic()
+        view.x = (this.stage.stageWidth - view.width ) / 2;
+        this.addChild(view);
+
+
+        return;
+
+
+        // AppFacade.getInstance().startUp();
+        // var teacher;
+        // var viewWidth = window.innerWidth;
+        // var viewHeight = window.innerHeight;
+        // console.log(viewWidth + "----" + viewHeight);
+        // var _self = this;
+        // if (GloableData.isDebug==true) {
+        //     getNativeEnvVal(function (data) {
+        //         if (data) {
+        //             console.log(data);
+        //             teacher = data;
+        //             //teacher = JSON.parse(data);
+        //         }
+        //         var viewWidthheight = window.innerWidth / window.innerHeight;
+        //         console.log("00000000------" + viewWidthheight)
+        //         if (teacher.os == "windows") {
+        //             GloableData.deviceType = "Pc";
+        //         } else {
+        //             if (parseFloat(viewWidthheight.toFixed(2)) <= parseFloat((16 / 9).toFixed(2)) && parseFloat(viewWidthheight.toFixed(2)) > parseFloat((4 / 3).toFixed(2))) {
+        //                 GloableData.deviceType = "Pad";
+        //                 console.log("0000000-----Pad")
+        //             } else if (parseFloat(viewWidthheight.toFixed(2)) > parseFloat((16 / 9).toFixed(2))) {
+        //                 GloableData.deviceType = "Mobile";
+        //                 console.log("000000------mobile")
+        //             }
+        //         }
+        //         _self.addChild(MainUIView.getInstance());
+        //         MainUIView.getInstance().showView(new ui.MainView(), ui.MainViewMediator.NAME, true);
+        //     }, this);
+        // } else {
+        //     GloableData.deviceType="Pc"
+        //     _self.addChild(MainUIView.getInstance());
+        //     MainUIView.getInstance().showView(new ui.MainView(), ui.MainViewMediator.NAME, true);
+        // }
 
 
         //alert("前");
@@ -154,7 +163,7 @@ class Main extends eui.UILayer {
 
 
         //console.log("学而思架构5.2.15")
-        console.log('git merge test');
+
     }
     /**
      * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。
