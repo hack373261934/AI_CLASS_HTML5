@@ -277,4 +277,3 @@ var ui;
     //     this.view.GroupBox.addChild(this.view.lable);
     // }
 })(ui || (ui = {}));
-//# sourceMappingURL=MainViewMediator.js.map

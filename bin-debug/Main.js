@@ -217,6 +217,7 @@ var Main = (function (_super) {
         // alert("后");
         //console.log("======" + parseFloat(viewWidthheight.toFixed(2)));
         //console.log("学而思架构5.2.15")
+        console.log('git merge test');
     };
     /**
      * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。
@@ -258,4 +259,3 @@ var Main = (function (_super) {
     return Main;
 }(eui.UILayer));
 __reflect(Main.prototype, "Main");
-//# sourceMappingURL=Main.js.map

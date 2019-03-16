@@ -100,4 +100,3 @@ var MainUIView = (function (_super) {
     return MainUIView;
 }(egret.DisplayObjectContainer));
 __reflect(MainUIView.prototype, "MainUIView");
-//# sourceMappingURL=MainUIView.js.map
