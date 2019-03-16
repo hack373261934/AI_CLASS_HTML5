@@ -14,8 +14,9 @@ r.prototype = e.prototype, t.prototype = new r();
  */
 var ConnectTopic = (function (_super) {
     __extends(ConnectTopic, _super);
-    function ConnectTopic() {
+    function ConnectTopic(data) {
         var _this = _super.call(this) || this;
+        _this.deviceType = GloableData.deviceType;
         // 滑动拖线的起点是否有效
         _this.isValidStart = false;
         // 当前激活的问题

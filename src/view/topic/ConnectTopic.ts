@@ -10,7 +10,7 @@ class ConnectTopic extends eui.Component implements eui.UIComponent {
 	public lineGroup: eui.Group;
 	public timeLabel: eui.Label;
 	public publishBtn: eui.Button;
-
+	public deviceType=GloableData.deviceType;
 	// 当前游戏的答案拍下来
 	private config;
 
@@ -25,7 +25,7 @@ class ConnectTopic extends eui.Component implements eui.UIComponent {
 	// 连线的斜率
 	private slope = 1;
 
-	public constructor() {
+	public constructor(data) {
 		super();
 		this.skinName = 'ConnectTopicSkin';
 	}

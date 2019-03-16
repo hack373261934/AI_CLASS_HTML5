@@ -183,7 +183,7 @@ var ui;
                     _this.view.classTI.x = 0;
                     _this.view.classTI.y = 0;
                     if (GloableData.quizsData.data.quizs[GloableData.classMax].quizType == 2) {
-                        var viewTopic = new ConnectTopic();
+                        var viewTopic = new ConnectTopic(GloableData.quizsData.data.quizs[GloableData.classMax]);
                         viewTopic.width = _this.view.width;
                         viewTopic.height = _this.view.height;
                         viewTopic.x = 0;

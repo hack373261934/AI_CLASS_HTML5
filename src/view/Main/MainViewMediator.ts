@@ -192,7 +192,7 @@ module ui {
                     this.view.classTI.x = 0;
                     this.view.classTI.y = 0;
                     if (GloableData.quizsData.data.quizs[GloableData.classMax].quizType == 2) {
-                        let viewTopic = new ConnectTopic()
+                        let viewTopic = new ConnectTopic(GloableData.quizsData.data.quizs[GloableData.classMax])
                         viewTopic.width=this.view.width;
                         viewTopic.height=this.view.height;
                         viewTopic.x = 0;
