@@ -56,7 +56,7 @@ module ui {
                     this.stage.setContentSize(1440, 812);
                     console.log(GloableData.deviceType + "--加载学生端Pad版皮肤")
                     this.skinName = "resource/game_skins/PadViewSkin.exml";
-                    this.BtnStart.visible = true;
+                    this.BtnStart.visible = false;
                     this.TimerLable.y = 330;
                     break;
                 default:
@@ -138,8 +138,9 @@ module ui {
                 console.log(data);
                 this.classTI = new eui.Image;
                 this.classTI.source = data;
+            
                 this.GroupBox.addChild(this.classTI);
-
+this.classTI.x=(this.GroupBox.width-this.classBG.width)/2
 
             }, this, RES.ResourceItem.TYPE_IMAGE)
 

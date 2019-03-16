@@ -180,7 +180,7 @@ var ui;
                     _this.view.classTI = new eui.Image;
                     _this.view.classTI.source = data;
                     _this.view.GroupBox.addChild(_this.view.classTI);
-                    _this.view.classTI.x = 0;
+                    _this.view.classTI.x = (_this.view.GroupBox.width - _this.view.classTI.width) / 2;
                     _this.view.classTI.y = 0;
                     if (GloableData.quizsData.data.quizs[GloableData.classMax].quizType == 2) {
                         var viewTopic = new ConnectTopic(GloableData.quizsData.data.quizs[GloableData.classMax]);

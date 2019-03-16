@@ -38,7 +38,7 @@ var ui;
                     this.stage.setContentSize(1440, 812);
                     console.log(GloableData.deviceType + "--加载学生端Pad版皮肤");
                     this.skinName = "resource/game_skins/PadViewSkin.exml";
-                    this.BtnStart.visible = true;
+                    this.BtnStart.visible = false;
                     this.TimerLable.y = 330;
                     break;
                 default:
@@ -113,6 +113,7 @@ var ui;
                 _this.classTI = new eui.Image;
                 _this.classTI.source = data;
                 _this.GroupBox.addChild(_this.classTI);
+                _this.classTI.x = (_this.GroupBox.width - _this.classBG.width) / 2;
             }, this, RES.ResourceItem.TYPE_IMAGE);
             // ///创建 ImageLoader 对象
             // var loader: egret.ImageLoader = new egret.ImageLoader();

@@ -189,7 +189,7 @@ module ui {
                     this.view.classTI = new eui.Image;
                     this.view.classTI.source = data;
                     this.view.GroupBox.addChild(this.view.classTI);
-                    this.view.classTI.x = 0;
+                    this.view.classTI.x = (this.view.GroupBox.width-this.view.classTI.width)/2;
                     this.view.classTI.y = 0;
                     if (GloableData.quizsData.data.quizs[GloableData.classMax].quizType == 2) {
                         let viewTopic = new ConnectTopic(GloableData.quizsData.data.quizs[GloableData.classMax])
