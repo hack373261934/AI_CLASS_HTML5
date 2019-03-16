@@ -1,1 +1,0 @@
-declare function dispathchEventToStage(msg:string);
