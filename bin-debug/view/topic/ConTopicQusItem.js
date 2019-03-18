@@ -29,7 +29,11 @@ var ConTopicQusItem = (function (_super) {
     ConTopicQusItem.prototype.childrenCreated = function () {
         _super.prototype.childrenCreated.call(this);
         // 
+        if (GloableData.deviceType == "Pc") {
+            this.activeBtn.visible = true;
+        }
     };
     return ConTopicQusItem;
 }(eui.Component));
 __reflect(ConTopicQusItem.prototype, "ConTopicQusItem", ["eui.UIComponent", "egret.DisplayObject"]);
+//# sourceMappingURL=ConTopicQusItem.js.map

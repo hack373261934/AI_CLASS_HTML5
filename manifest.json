@@ -15,7 +15,7 @@
 	"game": [
 		"bin-debug/framework/Mediator.js",
 		"bin-debug/view/Base/BaseView.js",
-		"bin-debug/interfaces/IMediator.js",
+		"bin-debug/utils/Dictionary.js",
 		"bin-debug/Main.js",
 		"bin-debug/Platform.js",
 		"bin-debug/ThemeAdapter.js",
@@ -30,8 +30,8 @@
 		"bin-debug/framework/ProxyManager.js",
 		"bin-debug/interfaces/IComparable.js",
 		"bin-debug/interfaces/IDisposable.js",
+		"bin-debug/interfaces/IMediator.js",
 		"bin-debug/AssetAdapter.js",
-		"bin-debug/utils/Dictionary.js",
 		"bin-debug/utils/IDictionary.js",
 		"bin-debug/utils/PicLayout.js",
 		"bin-debug/utils/SoundManager.js",
@@ -45,8 +45,10 @@
 		"bin-debug/view/Main/MainView.js",
 		"bin-debug/view/Main/MainViewHandle.js",
 		"bin-debug/view/Main/MainViewMediator.js",
+		"bin-debug/view/Main/PencilItem.js",
 		"bin-debug/view/topic/ConnectTopic.js",
 		"bin-debug/view/topic/ConTopicAnsItem.js",
-		"bin-debug/view/topic/ConTopicQusItem.js"
+		"bin-debug/view/topic/ConTopicQusItem.js",
+		"bin-debug/view/topic/TopicViewHandle.js"
 	]
 }

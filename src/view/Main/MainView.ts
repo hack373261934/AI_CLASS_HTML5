@@ -23,9 +23,10 @@ module ui {
         public pan_01: eui.Button;
         public pan_02: eui.Button;
         public pan_03: eui.Button;
-        public BtnClearPan: eui.Button;
+        public BtnClearPan: PencilItem;
         public BtnLiang: eui.Button;
         public TimerLable: eui.Label;
+        public LableTip: eui.Label;
         public imgURL: string = "";
         public lable: egret.TextField;
         public texture: egret.Texture;
@@ -51,18 +52,25 @@ module ui {
                     this.stage.setContentSize(1440, 1080);
                     console.log(GloableData.deviceType + "--加载老师端皮肤")
                     this.skinName = "resource/game_skins/TeaViewSkin.exml";
+                    var panItem = new PencilItem();
+                    panItem.x = this.EvenGroup.width - panItem.width;
+                    panItem.y = 100;
+                    this.addChild(panItem);
+                    // GloableData.valScale=this.GroupBox.width/1440;
                     break;
                 case "Pad":
                     this.stage.setContentSize(1440, 812);
                     console.log(GloableData.deviceType + "--加载学生端Pad版皮肤")
                     this.skinName = "resource/game_skins/PadViewSkin.exml";
                     this.BtnStart.visible = false;
+                    this.BtnEnd.visible = false;
                     this.TimerLable.y = 330;
+                    GloableData.valScale=this.GroupBox.width/1440;
                     break;
                 default:
                     console.log(GloableData.deviceType + "--加载学生端Mobile版皮肤")
                     this.skinName = "resource/game_skins/StuViewSkin.exml";
-                    this.BtnStart.visible = false;
+                    //this.BtnStart.visible = false;
                     this.TimerLable.y = 470;
             }
             if (GloableData.isDebug == true) {
@@ -120,27 +128,43 @@ module ui {
             GloableData.quizsData = JSON.parse(data);
             // GloableData.classMax=GloableData.quizsData.data.quizs.lengt
 
-            if (GloableData.deviceType != "Pc") {
-                //-----创建背景对象
-                egret.ImageLoader.crossOrigin = 'anonymous';
-                RES.getResByUrl(GloableData.quizsData.data.quizs[GloableData.classMax].quizBgImages[GloableData.classMax].mediaUrl, (data) => {
-                    console.log(data);
-                    this.classBG.source = data;
-                    this.GroupBox.addChild(this.classBG);
+            // if (GloableData.deviceType != "Pc") {
+            //     //-----创建背景对象
+            //     egret.ImageLoader.crossOrigin = 'anonymous';
+            //     RES.getResByUrl(GloableData.quizsData.data.quizs[GloableData.classMax].quizBgImages[GloableData.classMax].mediaUrl, (data) => {
+            //         console.log(data);
+            //         this.classBG.source = data;
+            //         this.GroupBox.addChild(this.classBG);
 
-                }, this, RES.ResourceItem.TYPE_IMAGE)
-            }
-
+            //     }, this, RES.ResourceItem.TYPE_IMAGE)
+            // } else {
+            //     this.LableTip.text = GloableData.classMax + 1 + "/" + GloableData.quizsData.data.quizs.length + ":调整就位就可以开始上课了"
+            // }
 
             //-----创建图片对象
             egret.ImageLoader.crossOrigin = 'anonymous';
-            RES.getResByUrl(GloableData.quizsData.data.quizs[GloableData.classMax].quizItems[0].mediaUrl, (data) => {
+            RES.getResByUrl(GloableData.quizsData.data.quizs[GloableData.classMax].quizFgImages[0].mediaUrl, (data) => {
                 console.log(data);
                 this.classTI = new eui.Image;
                 this.classTI.source = data;
-            
                 this.GroupBox.addChild(this.classTI);
-this.classTI.x=(this.GroupBox.width-this.classBG.width)/2
+                if (GloableData.deviceType == "Pc") {
+
+                    var scale = this.GroupBox.height / this.classTI.height;
+                    GloableData.valScale = scale;
+                    this.classTI.width = this.classTI.width * scale;
+                    this.classTI.height = this.classTI.height * scale;
+
+                    this.classTI.x = (1440 - this.classTI.width) / 2;
+                } else {
+                    var scale = this.GroupBox.height / this.classTI.height;
+
+                    this.classTI.width = this.classTI.width * scale;
+                    this.classTI.height = this.classTI.height * scale;
+
+                    this.classTI.x = (1077 - this.classTI.width) / 2;
+                }
+
 
             }, this, RES.ResourceItem.TYPE_IMAGE)
 

@@ -36,28 +36,41 @@ var MainViewHandle = (function (_super) {
                 case 20001:
                     //alert("上课");
                     view.timer.stop();
-                    view.removeChild(view.DialogGroup);
+                    view.DialogGroup.visible = false;
                     break;
                 case 20002:
                     view.PenGroup.removeChildren();
-                    ;
                     view.PenGroup.visible = false;
-                    view.BtnClearPan.enabled = false;
-                    if (GloableData.classMax != GloableData.quizsData.data.quizs.length - 1) {
+                    GloableData.classMax += 1;
+                    if (GloableData.classMax != GloableData.quizsData.data.quizs.length) {
                         view.GroupBox.removeChildren();
-                        GloableData.classMax += 1;
-                        view.BtnPrev.enabled = true;
-                        if (GloableData.classMax === GloableData.quizsData.data.quizs.length - 1) {
-                            view.BtnNext.enabled = false;
-                        }
-                        RES.getResByUrl(GloableData.quizsData.data.quizs[GloableData.classMax].quizBgImages[0].mediaUrl, function (data) {
-                            console.log(data);
-                            var image = new eui.Image();
-                            image.source = data;
-                            //image.source = this.testDate.kjbg[0].imgSrc;
-                            view.GroupBox.addChild(image);
-                            image.x = 0;
-                            image.y = 0;
+                        //view.LableTip.text = GloableData.classMax + 1 + "/" + GloableData.quizsData.data.quizs.length + ":调整就位就可以开始上课了"
+                        //view.BtnPrev.enabled = true;
+                        RES.getResByUrl(GloableData.quizsData.data.quizs[GloableData.classMax].quizFgImages[0].mediaUrl, function (data) {
+                            if (GloableData.quizsData.data.quizs[GloableData.classMax].quizType == 2) {
+                                var viewTopic = new ConnectTopic(GloableData.quizsData.data.quizs[GloableData.classMax]);
+                                viewTopic.width = view.width;
+                                viewTopic.height = view.height;
+                                viewTopic.x = (view.GroupBox.width - viewTopic.width) / 2;
+                                view.GroupBox.addChildAt(viewTopic, -1);
+                                return;
+                            }
+                            else {
+                                if (GloableData.deviceType == "Pc") {
+                                    view.classTI.x = (view.GroupBox.width - view.classTI.width) / 2;
+                                    view.classTI.source = data;
+                                    view.GroupBox.addChild(view.classTI);
+                                }
+                                else {
+                                    var scale = view.GroupBox.height / view.classTI.height;
+                                    alert('data' + data);
+                                    view.classTI.source = data;
+                                    view.classTI.width = view.classTI.width * scale;
+                                    view.classTI.height = view.classTI.height * scale;
+                                    view.GroupBox.addChild(view.classTI);
+                                    view.classTI.x = (1077 - view.classTI.width) / 2;
+                                }
+                            }
                         }, this, RES.ResourceItem.TYPE_IMAGE);
                         // //画一个转场背景图
                         // this.imgBg = new egret.Bitmap();
@@ -87,8 +100,21 @@ var MainViewHandle = (function (_super) {
                         //     // .to({ scaleX: 1, scaleY: 1 }, 300)
                         //     .call(this.maskOnComplate, this);//设置回调函数及作用域，可用于侦听动画完成
                     }
+                    else {
+                        if (GloableData.classMax == GloableData.quizsData.data.quizs.length) {
+                            view.LableTip.text = GloableData.classMax + "/" + GloableData.quizsData.data.quizs.length + ":调整就位就可以开始上课了";
+                            view.DialogGroup.visible = true;
+                            view.BtnStart.enabled = false;
+                            view.start.visible = false;
+                            view.end.visible = true;
+                            view.BtnPrev.enabled = true;
+                            view.GroupBox.removeChild(view.classTI);
+                            return;
+                        }
+                    }
                     break;
                 case 20003:
+                    view.PenGroup.removeChildren();
                     if (view.classMax != 0) {
                         view.GroupBox.removeChildren();
                         view.classMax -= 1;
@@ -112,6 +138,16 @@ var MainViewHandle = (function (_super) {
                     var _Pencil = new Pencil(_IDATA.data.eventData.pointColor, _IDATA.data.eventData.pointThickness, _IDATA.data.eventData.pointX, _IDATA.data.eventData.pointY, _IDATA.data.eventData.pointDrag);
                     view.PenGroup.addChild(_Pencil);
                     break;
+                case 20005:
+                    view.DialogGroup.visible = true;
+                    view.start.visible = false;
+                    view.end.visible = true;
+                    //this.view.GroupBox.removeChild(this.view.classTI);
+                    break;
+                case 20006:
+                    view.PenGroup.removeChildren();
+                    ;
+                    break;
                 default:
                     return;
             }
@@ -120,3 +156,4 @@ var MainViewHandle = (function (_super) {
     return MainViewHandle;
 }(egret.DisplayObjectContainer));
 __reflect(MainViewHandle.prototype, "MainViewHandle");
+//# sourceMappingURL=MainViewHandle.js.map

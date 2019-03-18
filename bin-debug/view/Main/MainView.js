@@ -33,18 +33,23 @@ var ui;
                     this.stage.setContentSize(1440, 1080);
                     console.log(GloableData.deviceType + "--加载老师端皮肤");
                     this.skinName = "resource/game_skins/TeaViewSkin.exml";
+                    var panItem = new ui.PencilItem();
+                    panItem.x = this.EvenGroup.width - panItem.width;
+                    panItem.y = 100;
+                    this.addChild(panItem);
                     break;
                 case "Pad":
                     this.stage.setContentSize(1440, 812);
                     console.log(GloableData.deviceType + "--加载学生端Pad版皮肤");
                     this.skinName = "resource/game_skins/PadViewSkin.exml";
                     this.BtnStart.visible = false;
+                    this.BtnEnd.visible = false;
                     this.TimerLable.y = 330;
                     break;
                 default:
                     console.log(GloableData.deviceType + "--加载学生端Mobile版皮肤");
                     this.skinName = "resource/game_skins/StuViewSkin.exml";
-                    this.BtnStart.visible = false;
+                    //this.BtnStart.visible = false;
                     this.TimerLable.y = 470;
             }
             if (GloableData.isDebug == true) {
@@ -97,23 +102,37 @@ var ui;
             var data = event.target.data;
             GloableData.quizsData = JSON.parse(data);
             // GloableData.classMax=GloableData.quizsData.data.quizs.lengt
-            if (GloableData.deviceType != "Pc") {
-                //-----创建背景对象
-                egret.ImageLoader.crossOrigin = 'anonymous';
-                RES.getResByUrl(GloableData.quizsData.data.quizs[GloableData.classMax].quizBgImages[GloableData.classMax].mediaUrl, function (data) {
-                    console.log(data);
-                    _this.classBG.source = data;
-                    _this.GroupBox.addChild(_this.classBG);
-                }, this, RES.ResourceItem.TYPE_IMAGE);
-            }
+            // if (GloableData.deviceType != "Pc") {
+            //     //-----创建背景对象
+            //     egret.ImageLoader.crossOrigin = 'anonymous';
+            //     RES.getResByUrl(GloableData.quizsData.data.quizs[GloableData.classMax].quizBgImages[GloableData.classMax].mediaUrl, (data) => {
+            //         console.log(data);
+            //         this.classBG.source = data;
+            //         this.GroupBox.addChild(this.classBG);
+            //     }, this, RES.ResourceItem.TYPE_IMAGE)
+            // } else {
+            //     this.LableTip.text = GloableData.classMax + 1 + "/" + GloableData.quizsData.data.quizs.length + ":调整就位就可以开始上课了"
+            // }
             //-----创建图片对象
             egret.ImageLoader.crossOrigin = 'anonymous';
-            RES.getResByUrl(GloableData.quizsData.data.quizs[GloableData.classMax].quizItems[0].mediaUrl, function (data) {
+            RES.getResByUrl(GloableData.quizsData.data.quizs[GloableData.classMax].quizFgImages[0].mediaUrl, function (data) {
                 console.log(data);
                 _this.classTI = new eui.Image;
                 _this.classTI.source = data;
                 _this.GroupBox.addChild(_this.classTI);
-                _this.classTI.x = (_this.GroupBox.width - _this.classBG.width) / 2;
+                if (GloableData.deviceType == "Pc") {
+                    var scale = _this.GroupBox.height / _this.classTI.height;
+                    GloableData.valScale = scale;
+                    _this.classTI.width = _this.classTI.width * scale;
+                    _this.classTI.height = _this.classTI.height * scale;
+                    _this.classTI.x = (1440 - _this.classTI.width) / 2;
+                }
+                else {
+                    var scale = _this.GroupBox.height / _this.classTI.height;
+                    _this.classTI.width = _this.classTI.width * scale;
+                    _this.classTI.height = _this.classTI.height * scale;
+                    _this.classTI.x = (1077 - _this.classTI.width) / 2;
+                }
             }, this, RES.ResourceItem.TYPE_IMAGE);
             // ///创建 ImageLoader 对象
             // var loader: egret.ImageLoader = new egret.ImageLoader();
@@ -206,3 +225,4 @@ var ui;
     ui.MainView = MainView;
     __reflect(MainView.prototype, "ui.MainView");
 })(ui || (ui = {}));
+//# sourceMappingURL=MainView.js.map

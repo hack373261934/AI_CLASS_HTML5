@@ -20,3 +20,4 @@ var EventCenter = (function () {
     return EventCenter;
 }());
 __reflect(EventCenter.prototype, "EventCenter");
+//# sourceMappingURL=EventCenter.js.map

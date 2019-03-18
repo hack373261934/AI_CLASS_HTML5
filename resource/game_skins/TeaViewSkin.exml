@@ -2,15 +2,12 @@
 <e:Skin class="StuViewSkin" width="1440" height="1080" xmlns:e="http://ns.egret.com/eui"
         xmlns:w="http://ns.egret.com/wing">
 	<w:Config id="16975f92f27"/>
-	<e:Group id="GroupBox" width="1920" height="1080" y="0" horizontalCenter="0"></e:Group>
-	<e:Group id="AniGroup" width="1440" height="1080" x="0" y="0">
+	<e:Group id="GroupBox" width="1440" height="1080" y="0" x="0"></e:Group>
+	<e:Group id="AniGroup" width="1440" height="1080" x="0" y="0" visible="false">
 	</e:Group>
-	<e:Group id="PenGroup" anchorOffsetX="0" anchorOffsetY="0" width="1440" height="1080" y="0" x="0"/>
-	<e:Group id="EvenGroup" width="100" height="1080" x="1336" y="0" anchorOffsetX="0">
-		<e:Button id="BtnPrev" label="上一题" visible="false" enabled="false" height="50" bottom="0" left="0"/>
-		<e:Button id="BtnAni" label="播放动画" enabled="true" width="100" height="50" y="55" right="0"/>
-		<e:Button id="BtnNext" label="下一题" y="994" x="0"/>
-		<e:Button id="pan_01" label="" height="50" width="100" y="111" right="0">
+	<e:Group id="PenGroup" anchorOffsetX="0" anchorOffsetY="0" width="1440" x="0" height="1080" y="0" visible="false"/>
+	<e:Group id="EvenGroup" height="76" y="0" anchorOffsetX="0" left="0" right="0" anchorOffsetY="0">
+		<e:Button id="pan_01" label="" height="50" width="100" y="111" right="0" visible="false">
 		<e:skinName>
 			<e:Skin states="up,down,disabled">
 			<e:Image width="100%" height="100%" source="hong_png"/>
@@ -18,7 +15,7 @@
 			</e:Skin>
 		</e:skinName>
 		</e:Button>
-		<e:Button id="pan_02" label="" width="100" height="50" y="164" right="0">
+		<e:Button id="pan_02" label="" width="100" height="50" y="164" right="0" visible="false">
 		<e:skinName>
 			<e:Skin states="up,down,disabled">
 			<e:Image width="100%" height="100%" source="huang_png"/>
@@ -26,7 +23,7 @@
 			</e:Skin>
 		</e:skinName>
 		</e:Button>
-		<e:Button id="pan_03" label="" width="100" height="50" y="217" right="0">
+		<e:Button id="pan_03" label="" width="100" height="50" y="217" right="0" visible="false">
 		<e:skinName>
 			<e:Skin states="up,down,disabled">
 			<e:Image width="100%" height="100%" source="lan_png"/>
@@ -34,7 +31,25 @@
 			</e:Skin>
 		</e:skinName>
 		</e:Button>
-		<e:Button id="BtnClearPan" label="清除画笔" enabled="false" height="50" width="100" y="270" right="0"/>
+		<e:Button id="BtnClearPan" label="清除画笔" enabled="false" height="50" width="100" y="270" right="0" visible="false"/>
+		<e:Rect width="1440" x="0" height="76" y="0" fillColor="0x323232" fillAlpha="0.8" scaleX="1" scaleY="1"/>
+		<e:Button id="BtnPrev" label="" width="48" y="14" scaleX="1" scaleY="1" x="12">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="btn_left_dis_png"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</e:skinName>
+		</e:Button>
+		<e:Button id="BtnNext" label="" y="15" width="48" scaleX="1" scaleY="1" x="1379">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="btn_right_dis_png"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</e:skinName>
+		</e:Button>
+		<e:Label id="LableTip" text="1/31: 调整就位就可以开始上课了" size="28" fontFamily="Arial" bold="true" width="1224" scaleX="1" scaleY="1" right="128" top="24" anchorOffsetX="0" anchorOffsetY="0" height="32" verticalAlign="middle"/>
 	</e:Group>
 	<e:Group id="DialogGroup" width="1440" height="1080" x="0" y="0">
 		<e:Group id="start" scaleX="1" scaleY="1" width="1440" x="0" height="1080" y="0">
@@ -51,7 +66,7 @@
 		</e:Group>
 		<e:Group id="end" scaleX="1" scaleY="1" width="1440" x="0" height="1080" y="0" visible="false">
 			<e:Rect width="784" height="401.52" anchorOffsetX="0" anchorOffsetY="0" strokeAlpha="0" fillColor="0xFFFFFF" ellipseWidth="20" ellipseHeight="20" x="328" y="339" scaleX="1" scaleY="1"/>
-			<e:Label id="TimerLable0" text="CLASS OVER" y="385.76000000000005" anchorOffsetX="0" width="550" anchorOffsetY="0" height="154" textColor="0x000000" size="71" fontFamily="Helvetica" textAlign="center" verticalAlign="middle" horizontalCenter="0" x="445" scaleX="1" scaleY="1" bold="true"/>
+			<e:Label id="ClassoverLable" text="CLASS OVER" y="385.76000000000005" anchorOffsetX="0" width="550" anchorOffsetY="0" height="154" textColor="0x000000" size="71" fontFamily="Helvetica" textAlign="center" verticalAlign="middle" horizontalCenter="0" x="445" scaleX="1" scaleY="1" bold="true"/>
 			<e:Button id="BtnEnd" label="End" anchorOffsetX="0" width="240" anchorOffsetY="0" height="100" y="572.73" enabled="true" horizontalCenter="0" x="596" scaleX="1" scaleY="1">
 				<e:skinName>
 					<e:Skin states="up,down,disabled">

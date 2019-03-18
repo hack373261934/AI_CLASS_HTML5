@@ -116,6 +116,7 @@ class Main extends eui.UILayer {
                 }
                 var viewWidthheight = window.innerWidth / window.innerHeight;
                 console.log("00000000------" + viewWidthheight)
+                GloableData.lessonID=teacher.lessonLid;
                 if (teacher.os == "windows") {
                     GloableData.deviceType = "Pc";
                 } else {

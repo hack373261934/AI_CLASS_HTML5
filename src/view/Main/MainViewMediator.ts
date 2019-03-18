@@ -7,6 +7,7 @@ module ui {
         public circle: egret.Shape;
         public imgBg: egret.Bitmap;
         private _fish;
+        private viewTopic;
         constructor(view: ui.MainView) {
             super(MainViewMediator.NAME, view);
         }
@@ -21,7 +22,6 @@ module ui {
             this.view.BtnNext.addEventListener(egret.TouchEvent.TOUCH_TAP, this.nextClass, this);
             this.view.BtnPrev.addEventListener(egret.TouchEvent.TOUCH_TAP, this.prevClass, this);
             this.view.BtnStart.addEventListener(egret.TouchEvent.TOUCH_TAP, this.startClass, this);
-            this.view.BtnAni.addEventListener(egret.TouchEvent.TOUCH_TAP, this.startAni, this);
             this.view.pan_01.addEventListener(egret.TouchEvent.TOUCH_TAP, this.initPan, this);
             this.view.pan_02.addEventListener(egret.TouchEvent.TOUCH_TAP, this.initPan, this);
             this.view.pan_03.addEventListener(egret.TouchEvent.TOUCH_TAP, this.initPan, this);
@@ -33,7 +33,6 @@ module ui {
             this.view.BtnNext.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.nextClass, this);
             this.view.BtnPrev.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.prevClass, this);
             this.view.BtnStart.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.startClass, this);
-            this.view.BtnAni.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.startAni, this);
             this.view.pan_01.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.initPan, this);
             this.view.pan_02.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.initPan, this);
             this.view.pan_03.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.initPan, this);
@@ -43,10 +42,13 @@ module ui {
         public onEventCenterRegister(): void {
             // EventCenter.addEventListener(GameEventConstant.CLOSE_SERVERLIST,this.updateView,this);
             // EventCenter.addEventListener(GameEventConstant.SELECT_SERVER,this.initView,this);
+            EventCenter.addEventListener(GameEventConstant.CLEARPAN_EVENT, this.clearPan, this);
+            EventCenter.addEventListener(GameEventConstant.PAN_EVENT, this.initPan, this);
         }
 
         public onEventCenterRemove(): void {
-
+            EventCenter.removeEventListener(GameEventConstant.CLEARPAN_EVENT, this.clearPan, this);
+            EventCenter.removeEventListener(GameEventConstant.PAN_EVENT, this.initPan, this);
         }
 
         private testLiang(): void {
@@ -61,33 +63,35 @@ module ui {
         }
 
         private initPan(e: egret.TouchEvent): void {
-            this.view.BtnClearPan.enabled = true;
-            switch (e.currentTarget) {
-                case this.view.pan_01:
-                    console.log("选择了“红色”画笔");
-                    var _Pencil = new Pencil(0xFF0000, 10, [], [], []);
-                    this.view.PenGroup.visible = true;
-                    this.view.PenGroup.addChild(_Pencil);
-                    alert("画笔区域宽：" + this.view.PenGroup.width + "----画笔区域高" + this.view.PenGroup.height)
-                    break;
-                case this.view.pan_02:
-                    console.log("选择了“黄色”画笔");
-                    var _Pencil = new Pencil(0xFFFF00, 10, [], [], []);
-                    this.view.PenGroup.visible = true;
-                    this.view.PenGroup.addChild(_Pencil);
-                    break;
-                case this.view.pan_03:
-                    console.log("选择了“蓝色”画笔");
-                    var _Pencil = new Pencil(0x0000FF, 10, [], [], []);
-                    this.view.PenGroup.visible = true;
-                    this.view.PenGroup.addChild(_Pencil);
-                    break;
-                default:
-                    console.log("清除画笔")
-                    this.view.PenGroup.removeChildren();;
-                    this.view.PenGroup.visible = false;
-                    this.view.BtnClearPan.enabled = false;
-            }
+            console.log(1111111)
+            var _Pencil = new Pencil(0xFF0000, 10, [], [], []);
+            this.view.PenGroup.visible = true;
+            this.view.PenGroup.addChild(_Pencil);
+            // switch (e.currentTarget) {
+            //     case this.view.pan_01:
+            //         console.log("选择了“红色”画笔");
+            //         var _Pencil = new Pencil(0xFF0000, 10, [], [], []);
+            //         this.view.PenGroup.visible = true;
+            //         this.view.PenGroup.addChild(_Pencil);
+            //         break;
+            //     case this.view.pan_02:
+            //         console.log("选择了“黄色”画笔");
+            //         var _Pencil = new Pencil(0xFFFF00, 10, [], [], []);
+            //         this.view.PenGroup.visible = true;
+            //         this.view.PenGroup.addChild(_Pencil);
+            //         break;
+            //     case this.view.pan_03:
+            //         console.log("选择了“蓝色”画笔");
+            //         var _Pencil = new Pencil(0x0000FF, 10, [], [], []);
+            //         this.view.PenGroup.visible = true;
+            //         this.view.PenGroup.addChild(_Pencil);
+            //         break;
+            //     default:
+            //         console.log("清除画笔")
+            //         this.view.PenGroup.removeChildren();;
+            //         this.view.PenGroup.visible = false;
+            //         this.view.BtnClearPan.enabled = false;
+            // }
         }
 
         public startAni(): void {
@@ -122,7 +126,7 @@ module ui {
         public startClass(): void {
             console.log(EventData.eventID.start);
             // 拼接参数
-            var params: any = "{\"type\":" + EventData.eventID.start + ", \"quizId\":" + GloableData.quizsData.data.quizs[GloableData.classMax].quizId + ",\"quizItemId\":222,\"lessonLid\":100001,\"data\":{\"eventData\":{\"pointX\":[],\"pointY\":[]}}}";
+            var params: any = "{\"type\":" + EventData.eventID.start + ", \"quizId\":" + GloableData.quizsData.data.quizs[GloableData.classMax].quizId + ",\"quizItemId\":0,\"lessonLid\":" + GloableData.lessonID + ",\"data\":{\"eventData\":{\"pointX\":[],\"pointY\":[]}}}";
             if (GloableData.isDebug == true) {
                 sendImEventMsg(params, 1);
             } else {
@@ -134,37 +138,50 @@ module ui {
 
         public endClass(): void {
             // 拼接参数
-            alert("结束")
             var params: any = "{\"type\":" + EventData.eventID.end + ", \"quizId\":-1,\"quizItemId\":-1,\"lessonLid\":100001,\"data\":{\"eventData\":{\"pointX\":[],\"pointY\":[]}}}";
-            alert(params);
-            sendImEventMsg(params, 2);
+            if (GloableData.isDebug == true) {
+                sendImEventMsg(params, 2);
+            } else {
+                dispathchEventToStage(params);
+            }
+
+        }
+
+        public clearPan(): void {
+            var params: any = "{\"type\":" + EventData.eventID.clear + ", \"quizId\":" + GloableData.quizsData.data.quizs[GloableData.classMax].quizId + ",\"quizItemId\":-1,\"lessonLid\":" + GloableData.lessonID + ",\"data\":{\"eventData\":{\"pointX\":[],\"pointY\":[]}}}";
+            if (GloableData.isDebug == true) {
+                sendImEventMsg(params, 2);
+            } else {
+                dispathchEventToStage(params);
+            }
+            // var _PencilClear = new Pencil(0xFF0000, 10, [], [], [],false);
+            this.view.PenGroup.removeChildren();;
+            //this.view.PenGroup.visible = false;
+            //this.view.BtnClearPan.enabled = false;
         }
 
         public prevClass(): void {
-            //var time = utils.UIUtils.getTime(1034049494, 1);
-            //console.log("=======" + time);
-            console.log("上一题");
-            if (GloableData.classMax != 0) {
-                this.view.GroupBox.removeChildren();
-                GloableData.classMax -= 1;
-                this.view.BtnNext.enabled = true;
-                if (GloableData.classMax === 0) {
-                    this.view.BtnPrev.enabled = false;
-                }
-
-                RES.getResByUrl(GloableData.quizsData.data.quizs[GloableData.classMax].quizBgImages[0].mediaUrl, (data) => {
-                    console.log(data);
-                    var image = new eui.Image();
-                    image.source = data;
-                    //image.source = this.testDate.kjbg[0].imgSrc;
-                    this.view.GroupBox.addChild(image);
-                    image.x = this.view.stage.stageWidth / 2 - image.width / 2;
-                    image.y = 0;
-
-                }, this, RES.ResourceItem.TYPE_IMAGE)
-
+            this.prevContent();
+            var params: any = "{\"type\":" + EventData.eventID.prev + ", \"quizId\":" + GloableData.quizsData.data.quizs[GloableData.classMax].quizId + ",\"quizItemId\":0,\"lessonLid\":" + GloableData.lessonID + ",\"data\":{\"eventData\":{\"pointX\":[],\"pointY\":[]}}}";
+            if (GloableData.isDebug == true) {
+                sendImEventMsg(params, 1);
+            } else {
+                dispathchEventToStage(params);
             }
-            var params: any = "{\"type\":" + EventData.eventID.prev + ", \"quizId\":" + GloableData.quizsData.data.quizs[GloableData.classMax].quizId + ",\"quizItemId\":222,\"lessonLid\":100001,\"data\":{\"eventData\":{\"pointX\":[],\"pointY\":[]}}}";
+
+        }
+
+        public nextClass(): void {
+            console.log("下一题")
+            this.nextContent();
+            let currentQuizId = -1;
+            console.log(GloableData.classMax + "--->" + GloableData.quizsData.data.quizs.length)
+            if (GloableData.classMax < GloableData.quizsData.data.quizs.length) {
+                currentQuizId = GloableData.quizsData.data.quizs[GloableData.classMax].quizId;
+            }
+
+            // 拼接参数
+            var params: any = "{\"type\":" + EventData.eventID.next + ", \"quizId\":" + currentQuizId + ",\"quizItemId\":0,\"lessonLid\":" + GloableData.lessonID + ",\"data\":{\"eventData\":{\"pointX\":[],\"pointY\":[]}}}";
             if (GloableData.isDebug == true) {
                 sendImEventMsg(params, 1);
             } else {
@@ -172,32 +189,49 @@ module ui {
             }
 
 
+
         }
 
-        public nextClass(): void {
-            console.log("下一题")
-            this.view.PenGroup.removeChildren();;
+        // private maskOnComplate(): void {
+        //     egret.Tween.removeAllTweens();
+        //     this.view.AniGroup.removeChild(this.circle);
+        //     this.view.AniGroup.removeChild(this.imgBg);
+        // }
+        public nextContent(): void {
+            this.view.PenGroup.removeChildren();
             this.view.PenGroup.visible = false;
-            this.view.BtnClearPan.enabled = false;
+
             GloableData.classMax += 1;
             if (GloableData.classMax != GloableData.quizsData.data.quizs.length) {
-                this.view.GroupBox.removeChild(this.view.classTI);
+                this.view.GroupBox.removeChildren();
 
+                this.view.LableTip.text = GloableData.classMax + 1 + "/" + GloableData.quizsData.data.quizs.length + ":调整就位就可以开始上课了"
                 this.view.BtnPrev.enabled = true;
 
-                RES.getResByUrl(GloableData.quizsData.data.quizs[GloableData.classMax].quizBgImages[0].mediaUrl, (data) => {
-                    this.view.classTI = new eui.Image;
-                    this.view.classTI.source = data;
-                    this.view.GroupBox.addChild(this.view.classTI);
-                    this.view.classTI.x = (this.view.GroupBox.width-this.view.classTI.width)/2;
-                    this.view.classTI.y = 0;
+                RES.getResByUrl(GloableData.quizsData.data.quizs[GloableData.classMax].quizFgImages[0].mediaUrl, (data) => {
+
                     if (GloableData.quizsData.data.quizs[GloableData.classMax].quizType == 2) {
-                        let viewTopic = new ConnectTopic(GloableData.quizsData.data.quizs[GloableData.classMax])
-                        viewTopic.width=this.view.width;
-                        viewTopic.height=this.view.height;
-                        viewTopic.x = 0;
-                        this.view.addChild(viewTopic);
+                        this.viewTopic = new ConnectTopic(GloableData.quizsData.data.quizs[GloableData.classMax])
+                        this.viewTopic.width = this.view.width;
+                        this.viewTopic.height = this.view.height;
+                        this.viewTopic.x = (this.view.GroupBox.width - this.viewTopic.width) / 2;
+                        this.view.GroupBox.addChildAt(this.viewTopic, -1);
                         return;
+                    } else {
+
+                        if (GloableData.deviceType == "Pc") {
+                            this.view.classTI.x = (this.view.GroupBox.width - this.view.classTI.width) / 2
+                            this.view.classTI.source = data;
+                            this.view.GroupBox.addChild(this.view.classTI);
+                        } else {
+                            var scale = this.view.GroupBox.height / this.view.classTI.height;
+                            alert('data' + data);
+                            this.view.classTI.source = data;
+                            this.view.classTI.width = this.view.classTI.width * scale;
+                            this.view.classTI.height = this.view.classTI.height * scale;
+                            this.view.GroupBox.addChild(this.view.classTI);
+                            this.view.classTI.x = (1077 - this.view.classTI.width) / 2;
+                        }
                     }
 
                 }, this, RES.ResourceItem.TYPE_IMAGE)
@@ -232,84 +266,43 @@ module ui {
                 //     .call(this.maskOnComplate, this);//设置回调函数及作用域，可用于侦听动画完成
             } else {
                 if (GloableData.classMax == GloableData.quizsData.data.quizs.length) {
+                    this.view.LableTip.text = GloableData.classMax + "/" + GloableData.quizsData.data.quizs.length + ":调整就位就可以开始上课了"
                     this.view.DialogGroup.visible = true;
+                    this.view.BtnStart.enabled = false;
                     this.view.start.visible = false;
                     this.view.end.visible = true;
+                    this.view.BtnPrev.enabled = true;
                     this.view.GroupBox.removeChild(this.view.classTI);
+                    return;
 
                 }
             }
-            // 拼接参数
-            var params: any = "{\"type\":" + EventData.eventID.next + ", \"quizId\":" + GloableData.quizsData.data.quizs[GloableData.classMax].quizId + ",\"quizItemId\":222,\"lessonLid\":100001,\"data\":{\"eventData\":{\"pointX\":[],\"pointY\":[]}}}";
-            if (GloableData.isDebug == true) {
-                sendImEventMsg(params, 1);
-            } else {
-                dispathchEventToStage(params);
-            }
-
-
 
         }
 
-        // private maskOnComplate(): void {
-        //     egret.Tween.removeAllTweens();
-        //     this.view.AniGroup.removeChild(this.circle);
-        //     this.view.AniGroup.removeChild(this.imgBg);
-        // }
+        public prevContent(): void {
+            this.view.PenGroup.removeChildren();
+            this.view.PenGroup.visible = false;
+            console.log("上一题");
+            if (GloableData.classMax != 0) {
+                this.view.GroupBox.removeChildren();
+                GloableData.classMax -= 1;
+                this.view.LableTip.text = GloableData.classMax + 1 + "/" + GloableData.quizsData.data.quizs.length + ":调整就位就可以开始上课了"
+                this.view.BtnNext.enabled = true;
+                if (GloableData.classMax === 0) {
+                    this.view.BtnPrev.enabled = false;
+                }
+
+                RES.getResByUrl(GloableData.quizsData.data.quizs[GloableData.classMax].quizFgImages[0].mediaUrl, (data) => {
+                    this.view.classTI = new eui.Image;
+                    this.view.classTI.source = data;
+                    this.view.GroupBox.addChild(this.view.classTI);
+                    this.view.classTI.x = (this.view.GroupBox.width - this.view.classTI.width) / 2;
+                    this.view.classTI.y = 0;
+
+                }, this, RES.ResourceItem.TYPE_IMAGE)
+
+            }
+        }
     }
-
-    // private prevContent(event: egret.Event): void {
-    //     egret.ImageLoader.crossOrigin = 'anonymous';
-
-    //     RES.getResByUrl(this.view.testDate.data.quizs[this.view.classMax].quizBgImages[this.view.classMax].mediaUrl, (data) => {
-    //         console.log(data);
-    //         var image = new eui.Image();
-    //         image.source = data;
-    //         //image.source = this.testDate.kjbg[0].imgSrc;
-    //         this.view.GroupBox.addChild(image);
-    //         image.x = this.view.stage.stageWidth / 2 - image.width / 2;
-    //         image.y = 0;
-
-    //     }, this, RES.ResourceItem.TYPE_IMAGE)
-
-
-    //     this.view.lable = new egret.TextField();
-    //     //设置字体
-    //     this.view.lable.fontFamily = "Arial";
-    //     this.view.lable.y = 300;
-    //     this.view.lable.width = 1476;
-    //     this.view.lable.height = 750;
-    //     this.view.lable.textAlign = "center";
-    //     this.view.lable.text = "第" + (this.view.classMax + 1) + "课";
-    //     this.view.lable.size = 80;
-    //     this.view.GroupBox.addChild(this.view.lable);
-
-    // }
-
-    // private nextContent(event: egret.Event): void {
-    //     RES.getResByUrl(this.view.testDate.data.quizs[this.view.classMax].quizBgImages[this.view.classMax].mediaUrl, (data) => {
-    //         console.log(data);
-    //         var image = new eui.Image();
-    //         image.source = data;
-    //         //image.source = this.testDate.kjbg[0].imgSrc;
-    //         this.view.GroupBox.addChild(image);
-    //         image.x = this.view.stage.stageWidth / 2 - image.width / 2;
-    //         image.y = 0;
-
-    //     }, this, RES.ResourceItem.TYPE_IMAGE)
-
-
-    //     this.view.lable = new egret.TextField();
-    //     //设置字体
-    //     this.view.lable.fontFamily = "Arial";
-    //     this.view.lable.y = 300;
-    //     this.view.lable.width = 1476;
-    //     this.view.lable.height = 750;
-    //     this.view.lable.textAlign = "center";
-    //     this.view.lable.text = "第" + (this.view.classMax + 1) + "课";
-    //     this.view.lable.size = 80;
-    //     this.view.GroupBox.addChild(this.view.lable);
-
-    // }
-
 }

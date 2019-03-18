@@ -3,8 +3,8 @@
         xmlns:w="http://ns.egret.com/wing">
 	<w:Config id="16975f92f27"/>
 	<e:Image id="classBG" width="1440" height="810" y="2" fillMode="scale" source="" x="0"/>
-	<e:Group id="GroupBox" width="1077" height="810" x="0" y="0"></e:Group>
-	<e:Group id="AniGroup" left="0" right="0" top="0" bottom="0" width="1077">
+	<e:Group id="GroupBox" width="1077" height="810" x="0" y="0" scrollEnabled="true"></e:Group>
+	<e:Group id="AniGroup" left="0" right="0" top="0" bottom="0" width="1077" visible="false">
 	</e:Group>
 	<e:Group id="EvenGroup" width="1077" height="810" y="0" x="0" visible="false">
 		<e:Button id="BtnPrev" label="上一题"  enabled="false" height="50" bottom="0" left="0"/>
@@ -41,17 +41,17 @@
 		<e:Rect id="_student" width="345" height="259" y="277" scaleX="1" scaleY="1" horizontalCenter="0" fillAlpha="0"/>
 		<e:Image width="258" height="60" y="738" source="logo_png" scaleX="1" scaleY="1" x="52.5"/>
 	</e:Group>
-	<e:Group id="PenGroup" width="1077" height="810" y="0" x="0" anchorOffsetX="0" anchorOffsetY="0" visible="false"/>
+	<e:Group id="PenGroup" width="1077" height="810" y="0" x="0" anchorOffsetX="0" anchorOffsetY="0"/>
 	<e:Group id="DialogGroup" width="1077" x="0" height="810" y="0">
-		<e:Rect width="680" height="500" anchorOffsetX="0" anchorOffsetY="0" strokeAlpha="0" fillColor="0xffffff" ellipseWidth="20" ellipseHeight="20" horizontalCenter="0" y="155"/>
-		<e:Label id="TimerLable" text="" y="273" anchorOffsetX="0" width="550" anchorOffsetY="0" height="154" textColor="0x000000" size="122" fontFamily="Verdana" textAlign="center" verticalAlign="middle" horizontalCenter="0"/>
-		<e:Button id="BtnStart" label="Start" anchorOffsetX="0" width="240" anchorOffsetY="0" height="100" y="466.76" enabled="true" horizontalCenter="-51.5" visible="false">
-			<e:skinName>
-				<e:Skin states="up,down,disabled">
-				<e:Image width="100%" height="100%" source="btnbg_png"/>
-				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
-				</e:Skin>
-			</e:skinName>
-		</e:Button>
+		<e:Group id="start" scaleX="1" scaleY="1" left="0" right="0" top="0" bottom="0">
+			<e:Rect width="680" height="500" anchorOffsetX="0" anchorOffsetY="0" strokeAlpha="0" fillColor="0xffffff" ellipseWidth="20" ellipseHeight="20" horizontalCenter="0" y="155.00000000000003" x="199" scaleX="1" scaleY="1"/>
+			<e:Label id="TimerLable" text="" anchorOffsetX="0" width="550" anchorOffsetY="0" height="154" textColor="0x000000" size="122" fontFamily="Verdana" textAlign="center" horizontalCenter="0" x="264" scaleX="1" scaleY="1" verticalAlign="middle" verticalCenter="0"/>
+			<e:Button id="BtnStart" label="Button" x="327.00000000000006" y="512" scaleX="1" scaleY="1" visible="false"/>
+		</e:Group>
+		<e:Group id="end" scaleX="1" scaleY="1" left="0" right="0" top="0" bottom="0" visible="false">
+			<e:Rect width="680" height="500" anchorOffsetX="0" anchorOffsetY="0" strokeAlpha="0" fillColor="0xffffff" ellipseWidth="20" ellipseHeight="20" horizontalCenter="0" y="155.00000000000003" x="199" scaleX="1" scaleY="1"/>
+			<e:Label id="ClassoverLable" text="CLASS OVER" anchorOffsetX="0" width="550" anchorOffsetY="0" height="154" textColor="0x000000" size="76" fontFamily="Arial" textAlign="center" verticalAlign="middle" horizontalCenter="0" x="264" scaleX="1" scaleY="1" verticalCenter="0" bold="true"/>
+			<e:Button id="BtnEnd" label="Button" x="494" y="530" scaleX="1" scaleY="1" visible="false"/>
+		</e:Group>
 	</e:Group>
 </e:Skin>

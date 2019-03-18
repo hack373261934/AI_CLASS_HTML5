@@ -16,10 +16,15 @@ class GloableData {
     */
     public static isDebug: boolean = true;
 
+
+    public static valScale:number;
+
     /* 
     *课件数据
     */
     public static quizsData: any = null;
+
+    public static lessonID:string="1";
 
     /* 
     *当前课件第几页
@@ -37,9 +42,11 @@ module EventData {
     */
     export enum eventID {
         start = 20001,//开始上课å
-         end = 20005,//开始上课å
+         end = 20005,//下课å
         next = 20002,//切换下一题
         prev = 20003,//切换上一题
         point = 20004,//画笔事件
+        clear=20006,//清除画笔
+        active=20007,//激活题目
     }
 }

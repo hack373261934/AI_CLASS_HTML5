@@ -17,6 +17,7 @@ class ConTopicQusItem extends eui.Component implements eui.UIComponent {
 	public constructor() {
 		super();
 		this.skinName = 'ConTopicQusItemSkin';
+
 	}
 	protected partAdded(partName: string, instance: any): void {
 		super.partAdded(partName, instance);
@@ -25,6 +26,10 @@ class ConTopicQusItem extends eui.Component implements eui.UIComponent {
 	protected childrenCreated(): void {
 		super.childrenCreated();
 		// 
+		if (GloableData.deviceType == "Pc") {
+			this.activeBtn.visible = true;
+		}
 	}
+
 }
 

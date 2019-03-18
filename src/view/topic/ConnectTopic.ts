@@ -11,6 +11,8 @@ class ConnectTopic extends eui.Component implements eui.UIComponent {
 	public timeLabel: eui.Label;
 	public publishBtn: eui.Button;
 	public publishGroup: eui.Group;
+	public fgImg: eui.Image;
+
 
 	public deviceType = GloableData.deviceType;
 	// 当前游戏的答案拍下来
@@ -49,6 +51,12 @@ class ConnectTopic extends eui.Component implements eui.UIComponent {
 	}
 
 	private init() {
+
+		if (GloableData.deviceType == "Pc") {
+			this.publishGroup.visible = true;
+		}
+		this.fgImg.source = this.data.quizFgImages[0].mediaUrl;
+
 		// 配置文件
 		this.config = [];
 		let answerObj = JSON.parse(this.data.answer).answer;
@@ -75,6 +83,7 @@ class ConnectTopic extends eui.Component implements eui.UIComponent {
 	}
 
 	private addListener() {
+		 this.stage.addEventListener("onReceiveEvent", this.handleEvent, this);
 		// 添加激活问题按钮监听
 		this.questionGroup.addEventListener(egret.TouchEvent.TOUCH_TAP, this.questionGroupHandler, this);
 		// 添加滑动连线事件
@@ -85,6 +94,10 @@ class ConnectTopic extends eui.Component implements eui.UIComponent {
 		this.publishBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.publishBtnTapHandler, this);
 	}
 
+	private handleEvent(e: egret.Event):void{
+ 		TopicHandle.getInstance().setHandle(this, e.data);
+	}
+
 	private questionGroupHandler(e: egret.TouchEvent) {
 		let btn = e.target;
 		if (btn instanceof eui.Button) {
@@ -92,6 +105,28 @@ class ConnectTopic extends eui.Component implements eui.UIComponent {
 			btn.visible = false;
 			// 激活题目
 			this.activeQuestionItem = <ConTopicQusItem>btn.parent;
+			//console.log("----下标"+JSON.stringify(this.activeQuestionItem));
+
+
+			// 拼接参数
+			// var params: any = "{\"type\":" + EventData.eventID.active + ", \"quizId\":" + GloableData.quizsData.data.quizs[GloableData.classMax].quizId + ",\"quizItemId\":"+GloableData.quizsData.data.quizs[GloableData.classMax].upQuizItems[this.activeQuestionItem.name].quizItemId+",\"lessonLid\":"+GloableData.lessonID+",\"data\":{\"eventData\":{\"activeIndex\":"+this.activeQuestionItem.name+"}}}";
+            this.sendAnsItem(this.activeQuestionItem.name);
+			this.activeItem(this.activeQuestionItem.name);
+		}
+	}
+
+	private sendAnsItem(index:string):void{
+		// 拼接参数
+			var params: any = "{\"type\":" + EventData.eventID.active + ", \"quizId\":" + GloableData.quizsData.data.quizs[GloableData.classMax].quizId + ",\"quizItemId\":"+GloableData.quizsData.data.quizs[GloableData.classMax].upQuizItems[index].quizItemId+",\"lessonLid\":"+GloableData.lessonID+",\"data\":{\"eventData\":{\"activeIndex\":"+index+"}}}";
+            if (GloableData.isDebug == true) {
+                sendImEventMsg(params, 0);
+            } else {
+                dispathchEventToStage(params);
+            }
+	}
+
+	public activeItem(index:string):void{
+
 			// 显示public group
 			this.publishGroup.visible = true;
 			// 先让publish按钮enabled
@@ -116,7 +151,7 @@ class ConnectTopic extends eui.Component implements eui.UIComponent {
 			this.maskLayer.visible = true;
 			// 变更题目item的状态
 			this.questionGroup.$children.forEach((element: ConTopicQusItem) => {
-				if (element.name != btn.parent.name) {
+				if (element.name != index) {
 					this.updateMaskState(element.maskLayer, MASKSTATE.UNACTIVE);
 				} else {
 					// 显示正在连接的遮罩颜色
@@ -127,12 +162,12 @@ class ConnectTopic extends eui.Component implements eui.UIComponent {
 			this.answerGroup.$children.forEach((element: ConTopicAnsItem) => {
 				if (element.isConnected) {
 					this.updateMaskState(element.maskLayer, MASKSTATE.UNACTIVE);
+					 this.sendAnsItem(index);
 				} else {
 					// 显示正在连接的遮罩颜色
 					this.updateMaskState(element.maskLayer, MASKSTATE.ACTIVE);
 				}
 			});
-		}
 	}
 	//
 	private stageBeginHandler(e: egret.TouchEvent | { target: any }) {
@@ -350,11 +385,12 @@ class ConnectTopic extends eui.Component implements eui.UIComponent {
 			// 然后触发touchmove
 			// 先找到当前题目对应的答案
 			let ansItemIndex = this.config[this.activeQuestionItem.name];
+		
 			let ansItem = <ConTopicAnsItem>this.answerGroup.getChildAt(ansItemIndex);
 			// 计算出斜率
 			let endPointX = ansItem.localToGlobal().x + ansItem.width / 2;
 			let endPointY = ansItem.localToGlobal().y;
-			this.slope =  (this.startPointOfLine.x - endPointX) / (this.startPointOfLine.y - endPointY);
+			this.slope = (this.startPointOfLine.x - endPointX) / (this.startPointOfLine.y - endPointY);
 			console.log(this.publishDistance);
 			egret.Tween.get(this).to({ publishDistance: endPointY }, 800).call(() => {
 				console.log('publish连线完成');

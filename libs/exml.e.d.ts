@@ -58,3 +58,5 @@ declare class ConTopicQusItemSkin extends eui.Skin{
 }
 declare class StuViewSkin extends eui.Skin{
 }
+declare class TopButtonItemSkinSkin extends eui.Skin{
+}

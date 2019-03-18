@@ -6,6 +6,9 @@ var GameEventConstant = (function () {
     }
     //倒计时事件
     GameEventConstant.TIME_EVENT = "TIME_EVENT";
+    GameEventConstant.CLEARPAN_EVENT = "CLEARPAN_EVENT";
+    GameEventConstant.PAN_EVENT = "PAN_EVENT";
     return GameEventConstant;
 }());
 __reflect(GameEventConstant.prototype, "GameEventConstant");
+//# sourceMappingURL=GameEventConstant.js.map

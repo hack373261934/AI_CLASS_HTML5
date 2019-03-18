@@ -40,6 +40,10 @@ var ConnectTopic = (function (_super) {
         this.addListener();
     };
     ConnectTopic.prototype.init = function () {
+        if (GloableData.deviceType == "Pc") {
+            this.publishGroup.visible = true;
+        }
+        this.fgImg.source = this.data.quizFgImages[0].mediaUrl;
         // 配置文件
         this.config = [];
         var answerObj = JSON.parse(this.data.answer).answer;
@@ -65,6 +69,7 @@ var ConnectTopic = (function (_super) {
         }
     };
     ConnectTopic.prototype.addListener = function () {
+        this.stage.addEventListener("onReceiveEvent", this.handleEvent, this);
         // 添加激活问题按钮监听
         this.questionGroup.addEventListener(egret.TouchEvent.TOUCH_TAP, this.questionGroupHandler, this);
         // 添加滑动连线事件
@@ -74,58 +79,79 @@ var ConnectTopic = (function (_super) {
         // 发布答案按钮
         this.publishBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.publishBtnTapHandler, this);
     };
+    ConnectTopic.prototype.handleEvent = function (e) {
+        TopicHandle.getInstance().setHandle(this, e.data);
+    };
     ConnectTopic.prototype.questionGroupHandler = function (e) {
-        var _this = this;
         var btn = e.target;
         if (btn instanceof eui.Button) {
             // 隐藏激活按钮
             btn.visible = false;
             // 激活题目
             this.activeQuestionItem = btn.parent;
-            // 显示public group
-            this.publishGroup.visible = true;
-            // 先让publish按钮enabled
-            this.publishBtn.enabled = false;
-            // 更新倒计时
-            var num_1 = Math.floor(this.data.upQuizItems[this.activeQuestionItem.name].duration / 1000);
-            this.timeLabel.text = num_1 + 's';
-            var interval = 1000;
-            var t_1 = setInterval(function () {
-                num_1 -= 1;
-                _this.timeLabel.text = num_1 + 's';
-                if (num_1 <= 0) {
-                    _this.publishBtn.enabled = true;
-                    clearInterval(t_1);
-                }
-            }, interval);
-            // 记录起始点
-            // 起点坐标(舞台坐标系)
-            var point = this.activeQuestionItem.localToGlobal();
-            this.startPointOfLine.x = point.x + this.activeQuestionItem.width / 2;
-            this.startPointOfLine.y = point.y + this.activeQuestionItem.height + 10;
-            ;
-            this.maskLayer.visible = true;
-            // 变更题目item的状态
-            this.questionGroup.$children.forEach(function (element) {
-                if (element.name != btn.parent.name) {
-                    _this.updateMaskState(element.maskLayer, MASKSTATE.UNACTIVE);
-                }
-                else {
-                    // 显示正在连接的遮罩颜色
-                    _this.updateMaskState(element.maskLayer, MASKSTATE.ACTIVE);
-                }
-            });
-            // 变更答案item的状态
-            this.answerGroup.$children.forEach(function (element) {
-                if (element.isConnected) {
-                    _this.updateMaskState(element.maskLayer, MASKSTATE.UNACTIVE);
-                }
-                else {
-                    // 显示正在连接的遮罩颜色
-                    _this.updateMaskState(element.maskLayer, MASKSTATE.ACTIVE);
-                }
-            });
+            //console.log("----下标"+JSON.stringify(this.activeQuestionItem));
+            // 拼接参数
+            // var params: any = "{\"type\":" + EventData.eventID.active + ", \"quizId\":" + GloableData.quizsData.data.quizs[GloableData.classMax].quizId + ",\"quizItemId\":"+GloableData.quizsData.data.quizs[GloableData.classMax].upQuizItems[this.activeQuestionItem.name].quizItemId+",\"lessonLid\":"+GloableData.lessonID+",\"data\":{\"eventData\":{\"activeIndex\":"+this.activeQuestionItem.name+"}}}";
+            this.sendAnsItem(this.activeQuestionItem.name);
+            this.activeItem(this.activeQuestionItem.name);
         }
+    };
+    ConnectTopic.prototype.sendAnsItem = function (index) {
+        // 拼接参数
+        var params = "{\"type\":" + EventData.eventID.active + ", \"quizId\":" + GloableData.quizsData.data.quizs[GloableData.classMax].quizId + ",\"quizItemId\":" + GloableData.quizsData.data.quizs[GloableData.classMax].upQuizItems[index].quizItemId + ",\"lessonLid\":" + GloableData.lessonID + ",\"data\":{\"eventData\":{\"activeIndex\":" + index + "}}}";
+        if (GloableData.isDebug == true) {
+            sendImEventMsg(params, 0);
+        }
+        else {
+            dispathchEventToStage(params);
+        }
+    };
+    ConnectTopic.prototype.activeItem = function (index) {
+        var _this = this;
+        // 显示public group
+        this.publishGroup.visible = true;
+        // 先让publish按钮enabled
+        this.publishBtn.enabled = false;
+        // 更新倒计时
+        var num = Math.floor(this.data.upQuizItems[this.activeQuestionItem.name].duration / 1000);
+        this.timeLabel.text = num + 's';
+        var interval = 1000;
+        var t = setInterval(function () {
+            num -= 1;
+            _this.timeLabel.text = num + 's';
+            if (num <= 0) {
+                _this.publishBtn.enabled = true;
+                clearInterval(t);
+            }
+        }, interval);
+        // 记录起始点
+        // 起点坐标(舞台坐标系)
+        var point = this.activeQuestionItem.localToGlobal();
+        this.startPointOfLine.x = point.x + this.activeQuestionItem.width / 2;
+        this.startPointOfLine.y = point.y + this.activeQuestionItem.height + 10;
+        ;
+        this.maskLayer.visible = true;
+        // 变更题目item的状态
+        this.questionGroup.$children.forEach(function (element) {
+            if (element.name != index) {
+                _this.updateMaskState(element.maskLayer, MASKSTATE.UNACTIVE);
+            }
+            else {
+                // 显示正在连接的遮罩颜色
+                _this.updateMaskState(element.maskLayer, MASKSTATE.ACTIVE);
+            }
+        });
+        // 变更答案item的状态
+        this.answerGroup.$children.forEach(function (element) {
+            if (element.isConnected) {
+                _this.updateMaskState(element.maskLayer, MASKSTATE.UNACTIVE);
+                _this.sendAnsItem(index);
+            }
+            else {
+                // 显示正在连接的遮罩颜色
+                _this.updateMaskState(element.maskLayer, MASKSTATE.ACTIVE);
+            }
+        });
     };
     //
     ConnectTopic.prototype.stageBeginHandler = function (e) {
@@ -373,3 +399,4 @@ var MASKSTATE;
     MASKSTATE[MASKSTATE["ERROR"] = 4] = "ERROR";
     MASKSTATE[MASKSTATE["UNACTIVE"] = 5] = "UNACTIVE"; // 未激活状态
 })(MASKSTATE || (MASKSTATE = {}));
+//# sourceMappingURL=ConnectTopic.js.map

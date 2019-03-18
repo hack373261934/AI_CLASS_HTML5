@@ -18,11 +18,12 @@ var GloableData = (function () {
     *方便执行同步环境下的逻辑
     *默认为true=真机调试  false=本地调试
     */
-    GloableData.isDebug = true;
+    GloableData.isDebug = false;
     /*
     *课件数据
     */
     GloableData.quizsData = null;
+    GloableData.lessonID = "1";
     /*
     *当前课件第几页
     */
@@ -45,5 +46,8 @@ var EventData;
         eventID[eventID["next"] = 20002] = "next";
         eventID[eventID["prev"] = 20003] = "prev";
         eventID[eventID["point"] = 20004] = "point";
+        eventID[eventID["clear"] = 20006] = "clear";
+        eventID[eventID["active"] = 20007] = "active";
     })(eventID = EventData.eventID || (EventData.eventID = {}));
 })(EventData || (EventData = {}));
+//# sourceMappingURL=GloableData.js.map

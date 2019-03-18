@@ -114,3 +114,4 @@ var ui;
     ui.BaseTabBar = BaseTabBar;
     __reflect(BaseTabBar.prototype, "ui.BaseTabBar");
 })(ui || (ui = {}));
+//# sourceMappingURL=BaseTabBar.js.map

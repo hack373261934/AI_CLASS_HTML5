@@ -36,7 +36,7 @@ var Pencil = (function (_super) {
         //this.removeChild(this.M_Shap);
         this.M_Shap = new egret.Shape;
         this.M_Shap.graphics.beginFill(0xFFFFFF, 0);
-        this.M_Shap.graphics.drawRect(0, 0, 1440, 1080);
+        this.M_Shap.graphics.drawRect(0, 0, 1440 * GloableData.valScale, 1080 * GloableData.valScale);
         this.M_Shap.graphics.endFill();
         this.M_Shap.cacheAsBitmap = true;
         this.M_Shap.touchEnabled = true;
@@ -129,7 +129,7 @@ var Pencil = (function (_super) {
         // 拼接参数
         var params = "{\"type\":" + EventData.eventID.point + ", \"quizId\":" + GloableData.quizsData.data.quizs[GloableData.classMax].quizId + ",\"quizItemId\":222,\"lessonLid\":100001,\"data\":{\"eventData\":{\"pointX\":[" + this.M_ClickX + "],\"pointY\":[" + this.M_ClickY + "],\"pointDrag\":[" + this.M_ClickDrag + "],\"pointColor\":" + this.B_Color + ",\"pointThickness\":" + this.B_thickness + "}}}";
         if (GloableData.isDebug == true) {
-            sendImEventMsg(params, 1);
+            sendImEventMsg(params, 0);
         }
         else {
             dispathchEventToStage(params);
@@ -142,3 +142,4 @@ var Pencil = (function (_super) {
     return Pencil;
 }(egret.DisplayObjectContainer));
 __reflect(Pencil.prototype, "Pencil");
+//# sourceMappingURL=BasePencil.js.map

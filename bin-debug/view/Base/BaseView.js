@@ -53,3 +53,4 @@ var BaseUI = (function (_super) {
     return BaseUI;
 }(eui.Component));
 __reflect(BaseUI.prototype, "BaseUI");
+//# sourceMappingURL=BaseView.js.map

@@ -52,11 +52,11 @@ class Pencil extends egret.DisplayObjectContainer {
 
                 for (var i = 0; i < this.M_ClickX.length; i++) {
                     if (this.M_ClickDrag[i] && i) {
-                        this.M_Shap.graphics.moveTo(this.M_ClickX[i - 1], this.M_ClickY[i - 1]);
+                        this.M_Shap.graphics.moveTo(this.M_ClickX[i - 1]*GloableData.valScale, this.M_ClickY[i - 1]*GloableData.valScale);
                     } else {
-                        this.M_Shap.graphics.moveTo(this.M_ClickX[i], this.M_ClickY[i]);
+                        this.M_Shap.graphics.moveTo(this.M_ClickX[i]*GloableData.valScale, this.M_ClickY[i]*GloableData.valScale);
                     }
-                    this.M_Shap.graphics.lineTo(this.M_ClickX[i], this.M_ClickY[i]);
+                    this.M_Shap.graphics.lineTo(this.M_ClickX[i]*GloableData.valScale, this.M_ClickY[i]*GloableData.valScale);
                 }
                 this.M_Shap.graphics.endFill();
             }
@@ -137,7 +137,7 @@ class Pencil extends egret.DisplayObjectContainer {
         // 拼接参数
         var params: any = "{\"type\":" + EventData.eventID.point + ", \"quizId\":" + GloableData.quizsData.data.quizs[GloableData.classMax].quizId + ",\"quizItemId\":222,\"lessonLid\":100001,\"data\":{\"eventData\":{\"pointX\":[" + this.M_ClickX + "],\"pointY\":[" + this.M_ClickY + "],\"pointDrag\":[" + this.M_ClickDrag + "],\"pointColor\":" + this.B_Color + ",\"pointThickness\":" + this.B_thickness + "}}}";
          if (GloableData.isDebug == true) {
-            sendImEventMsg(params, 1);
+            sendImEventMsg(params, 0);
         } else {
             dispathchEventToStage(params);
         }

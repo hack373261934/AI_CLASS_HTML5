@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="ConnectTopicSkin" width="1440" height="1080" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
-	<e:Rect left="-2" right="2" top="0" bottom="0" fillColor="0xffffff"/>
+	<e:Rect left="-2" right="2" top="0" bottom="0" fillColor="0xffffff" visible="false"/>
+	<e:Image id="fgImg" left="0" right="0" top="0" bottom="0"/>
 	<e:Rect id="maskLayer" left="0" right="0" top="0" bottom="0" fillAlpha="0.5" visible="false"/>
 	<e:Group id="questionGroup" width="1098" y="276" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="0" touchThrough="true" touchChildren="true">
 		<ns1:ConTopicQusItem width="260" height="260" x="183" y="-1" anchorOffsetX="0" anchorOffsetY="0" name="0"/>
 		<ns1:ConTopicQusItem width="260" height="260" x="115" y="61" anchorOffsetX="0" anchorOffsetY="0" name="1"/>
 		<ns1:ConTopicQusItem width="260" height="260" x="125" y="71" anchorOffsetX="0" anchorOffsetY="0" name="2"/>
 		<e:layout>
-			<e:HorizontalLayout horizontalAlign="center" gap="90"/>
+			<e:HorizontalLayout horizontalAlign="center" gap="80"/>
 		</e:layout>
 	</e:Group>
 	<e:Group id="answerGroup" width="1098" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="0" bottom="164">
@@ -15,7 +16,7 @@
 		<ns1:ConTopicAnsItem width="260" height="260" x="474" y="36.5"/>
 		<ns1:ConTopicAnsItem width="260" height="260" x="774" y="36.5"/>
 		<e:layout>
-			<e:HorizontalLayout gap="90" horizontalAlign="center"/>
+			<e:HorizontalLayout gap="80" horizontalAlign="center"/>
 		</e:layout>
 	</e:Group>
 	<e:Group id="lineGroup" width="1098" height="120" y="533.97" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="0"/>
