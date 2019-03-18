@@ -399,4 +399,3 @@ var MASKSTATE;
     MASKSTATE[MASKSTATE["ERROR"] = 4] = "ERROR";
     MASKSTATE[MASKSTATE["UNACTIVE"] = 5] = "UNACTIVE"; // 未激活状态
 })(MASKSTATE || (MASKSTATE = {}));
-//# sourceMappingURL=ConnectTopic.js.map

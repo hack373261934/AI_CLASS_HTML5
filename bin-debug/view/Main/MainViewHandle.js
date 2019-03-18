@@ -156,4 +156,3 @@ var MainViewHandle = (function (_super) {
     return MainViewHandle;
 }(egret.DisplayObjectContainer));
 __reflect(MainViewHandle.prototype, "MainViewHandle");
-//# sourceMappingURL=MainViewHandle.js.map

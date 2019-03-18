@@ -36,7 +36,7 @@ var Pencil = (function (_super) {
         //this.removeChild(this.M_Shap);
         this.M_Shap = new egret.Shape;
         this.M_Shap.graphics.beginFill(0xFFFFFF, 0);
-        this.M_Shap.graphics.drawRect(0, 0, 1440 * GloableData.valScale, 1080 * GloableData.valScale);
+        this.M_Shap.graphics.drawRect(0, 0, 1440, 1080);
         this.M_Shap.graphics.endFill();
         this.M_Shap.cacheAsBitmap = true;
         this.M_Shap.touchEnabled = true;
@@ -56,12 +56,12 @@ var Pencil = (function (_super) {
                 this.M_Shap.graphics.lineStyle(this.B_thickness, this.B_Color, 1, true, "", "", "round");
                 for (var i = 0; i < this.M_ClickX.length; i++) {
                     if (this.M_ClickDrag[i] && i) {
-                        this.M_Shap.graphics.moveTo(this.M_ClickX[i - 1], this.M_ClickY[i - 1]);
+                        this.M_Shap.graphics.moveTo(this.M_ClickX[i - 1] * GloableData.valScale, this.M_ClickY[i - 1] * GloableData.valScale);
                     }
                     else {
-                        this.M_Shap.graphics.moveTo(this.M_ClickX[i], this.M_ClickY[i]);
+                        this.M_Shap.graphics.moveTo(this.M_ClickX[i] * GloableData.valScale, this.M_ClickY[i] * GloableData.valScale);
                     }
-                    this.M_Shap.graphics.lineTo(this.M_ClickX[i], this.M_ClickY[i]);
+                    this.M_Shap.graphics.lineTo(this.M_ClickX[i] * GloableData.valScale, this.M_ClickY[i] * GloableData.valScale);
                 }
                 this.M_Shap.graphics.endFill();
             }
@@ -142,4 +142,3 @@ var Pencil = (function (_super) {
     return Pencil;
 }(egret.DisplayObjectContainer));
 __reflect(Pencil.prototype, "Pencil");
-//# sourceMappingURL=BasePencil.js.map

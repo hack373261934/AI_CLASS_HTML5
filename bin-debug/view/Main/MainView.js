@@ -33,10 +33,11 @@ var ui;
                     this.stage.setContentSize(1440, 1080);
                     console.log(GloableData.deviceType + "--加载老师端皮肤");
                     this.skinName = "resource/game_skins/TeaViewSkin.exml";
-                    var panItem = new ui.PencilItem();
+                    var panItem = new PencilItem();
                     panItem.x = this.EvenGroup.width - panItem.width;
                     panItem.y = 100;
                     this.addChild(panItem);
+                    // GloableData.valScale=this.GroupBox.width/1440;
                     break;
                 case "Pad":
                     this.stage.setContentSize(1440, 812);
@@ -45,6 +46,7 @@ var ui;
                     this.BtnStart.visible = false;
                     this.BtnEnd.visible = false;
                     this.TimerLable.y = 330;
+                    GloableData.valScale = this.GroupBox.width / 1440;
                     break;
                 default:
                     console.log(GloableData.deviceType + "--加载学生端Mobile版皮肤");
@@ -225,4 +227,3 @@ var ui;
     ui.MainView = MainView;
     __reflect(MainView.prototype, "ui.MainView");
 })(ui || (ui = {}));
-//# sourceMappingURL=MainView.js.map

@@ -1,0 +1,283 @@
+{
+    "data": {
+        "quizs": [
+            {
+                "quizFgImages": [
+                    {
+                        "mediaUrl": "http://rc.fastschool.cn/fs/activity/pro/media/image/53a814597d644b53a0ca8c53698226c3.png",
+                        "mediaLid": "53a814597d644b53a0ca8c53698226c3"
+                    }
+                ],
+                "quizId": 1,
+                "quizType": 1,
+                "quizBgImages": [],
+                "quizItems": []
+            },
+            {
+                "quizFgImages": [
+                    {
+                        "mediaUrl": "http://rc.fastschool.cn/fs/activity/pro/media/image/3ae1f0604a4446f2a9e8b82e3d499159.png",
+                        "mediaLid": "3ae1f0604a4446f2a9e8b82e3d499159"
+                    }
+                ],
+                "quizId": 2,
+                "quizType": 1,
+                "quizBgImages": [],
+                "quizItems": []
+            },
+            {
+                "quizFgImages": [
+                    {
+                        "mediaUrl": "http://rc.fastschool.cn/fs/activity/pro/media/image/aabe2c9befdc4ecbbd55ba445819904f.png",
+                        "mediaLid": "aabe2c9befdc4ecbbd55ba445819904f"
+                    }
+                ],
+                "quizId": 3,
+                "quizType": 1,
+                "quizBgImages": [],
+                "quizItems": []
+            },
+            {
+                "upQuizItems": [
+                    {
+                        "duration": 3000,
+                        "itemType": 1,
+                        "mediaUrl": "http://rc.fastschool.cn/fs/activity/pro/media/image/abfb4d6cd5114a4f9874be22d75e2132.png",
+                        "translation": "",
+                        "quizItemId": 2,
+                        "mediaLid": "abfb4d6cd5114a4f9874be22d75e2132",
+                        "content": "Cc"
+                    },
+                    {
+                        "duration": 3000,
+                        "itemType": 1,
+                        "mediaUrl": "http://rc.fastschool.cn/fs/activity/pro/media/image/22d3398e68be44dda9badc956292d551.png",
+                        "translation": "",
+                        "quizItemId": 3,
+                        "mediaLid": "22d3398e68be44dda9badc956292d551",
+                        "content": "Hh"
+                    },
+                    {
+                        "duration": 3000,
+                        "itemType": 1,
+                        "mediaUrl": "http://rc.fastschool.cn/fs/activity/pro/media/image/c67d68b07112400b96b6baceef17b242.png",
+                        "translation": "",
+                        "quizItemId": 4,
+                        "mediaLid": "c67d68b07112400b96b6baceef17b242",
+                        "content": "Ff"
+                    }
+                ],
+                "quizFgImages": [
+                    {
+                        "mediaUrl": "http://rc.fastschool.cn/fs/activity/pro/media/image/5de0a4fce1b74c2a9f0d64015d36a56d.png",
+                        "mediaLid": "5de0a4fce1b74c2a9f0d64015d36a56d"
+                    }
+                ],
+                "answer": "{\"answer\":{\"0\":0,\"1\":2,\"2\":1}}",
+                "quizId": 4,
+                "downQuizItems": [
+                    {
+                        "itemType": 1,
+                        "mediaUrl": "http://rc.fastschool.cn/fs/activity/pro/media/image/814a349c3890427481cb135084ab9d84.png",
+                        "translation": "",
+                        "quizItemId": 5,
+                        "mediaLid": "814a349c3890427481cb135084ab9d84",
+                        "content": "cab"
+                    },
+                    {
+                        "itemType": 1,
+                        "mediaUrl": "http://rc.fastschool.cn/fs/activity/pro/media/image/9b5dfe5af36e4907a3c5fd773e67a4ec.png",
+                        "translation": "",
+                        "quizItemId": 6,
+                        "mediaLid": "9b5dfe5af36e4907a3c5fd773e67a4ec",
+                        "content": "fan"
+                    },
+                    {
+                        "itemType": 1,
+                        "mediaUrl": "http://rc.fastschool.cn/fs/activity/pro/media/image/a9394ddaf418484b8544836a35c2f7a4.png",
+                        "translation": "",
+                        "quizItemId": 7,
+                        "mediaLid": "a9394ddaf418484b8544836a35c2f7a4",
+                        "content": "hat"
+                    }
+                ],
+                "quizType": 2,
+                "quizBgImages": []
+            },
+            {
+                "quizFgImages": [
+                    {
+                        "mediaUrl": "http://rc.fastschool.cn/fs/activity/pro/media/image/345fe23c875b4110b76e5b67278bc3bd.png",
+                        "mediaLid": "345fe23c875b4110b76e5b67278bc3bd"
+                    }
+                ],
+                "quizId": 5,
+                "quizType": 1,
+                "quizBgImages": [],
+                "quizItems": []
+            },
+            {
+                "quizFgImages": [
+                    {
+                        "mediaUrl": "http://rc.fastschool.cn/fs/activity/pro/media/image/6c92e04fe3df478e97bb6e93365248c6.png",
+                        "mediaLid": "6c92e04fe3df478e97bb6e93365248c6"
+                    }
+                ],
+                "quizId": 6,
+                "quizType": 1,
+                "quizBgImages": [],
+                "quizItems": []
+            },
+            {
+                "quizFgImages": [
+                    {
+                        "mediaUrl": "http://rc.fastschool.cn/fs/activity/pro/media/image/ffd154f896dc4100aaa76e7c257e097a.png",
+                        "mediaLid": "ffd154f896dc4100aaa76e7c257e097a"
+                    }
+                ],
+                "quizId": 7,
+                "quizType": 1,
+                "quizBgImages": [],
+                "quizItems": []
+            },
+            {
+                "quizFgImages": [
+                    {
+                        "mediaUrl": "http://rc.fastschool.cn/fs/activity/pro/media/image/527b293038c64ec5ab2a8a0a8d91e9c7.png",
+                        "mediaLid": "527b293038c64ec5ab2a8a0a8d91e9c7"
+                    }
+                ],
+                "quizId": 8,
+                "quizType": 1,
+                "quizBgImages": [],
+                "quizItems": []
+            },
+            {
+                "quizFgImages": [
+                    {
+                        "mediaUrl": "http://rc.fastschool.cn/fs/activity/pro/media/image/9b55cbe408214fe0867df8f2bc93ce09.png",
+                        "mediaLid": "9b55cbe408214fe0867df8f2bc93ce09"
+                    }
+                ],
+                "quizId": 9,
+                "quizType": 1,
+                "quizBgImages": [],
+                "quizItems": []
+            },
+            {
+                "quizFgImages": [
+                    {
+                        "mediaUrl": "http://rc.fastschool.cn/fs/activity/pro/media/image/f918214a5eb14fc4a37bff5a510ed849.png",
+                        "mediaLid": "f918214a5eb14fc4a37bff5a510ed849"
+                    }
+                ],
+                "quizId": 10,
+                "quizType": 1,
+                "quizBgImages": [],
+                "quizItems": []
+            },
+            {
+                "quizFgImages": [
+                    {
+                        "mediaUrl": "http://rc.fastschool.cn/fs/activity/pro/media/image/19fc6555f17a41fc9902e9d0776e7762.png",
+                        "mediaLid": "19fc6555f17a41fc9902e9d0776e7762"
+                    }
+                ],
+                "quizId": 11,
+                "quizType": 1,
+                "quizBgImages": [],
+                "quizItems": []
+            },
+            {
+                "quizFgImages": [
+                    {
+                        "mediaUrl": "http://rc.fastschool.cn/fs/activity/pro/media/image/dc3407af6fd340009cbb85fdcb81f0b1.png",
+                        "mediaLid": "dc3407af6fd340009cbb85fdcb81f0b1"
+                    }
+                ],
+                "quizId": 12,
+                "quizType": 1,
+                "quizBgImages": [],
+                "quizItems": []
+            },
+            {
+                "quizFgImages": [
+                    {
+                        "mediaUrl": "http://rc.fastschool.cn/fs/activity/pro/media/image/25e96d661ad34526bffea3f8e926aa82.png",
+                        "mediaLid": "25e96d661ad34526bffea3f8e926aa82"
+                    }
+                ],
+                "quizId": 13,
+                "quizType": 1,
+                "quizBgImages": [],
+                "quizItems": []
+            },
+            {
+                "quizFgImages": [
+                    {
+                        "mediaUrl": "http://rc.fastschool.cn/fs/activity/pro/media/image/32213e2830cd46c897e0733fa9ccd4f1.png",
+                        "mediaLid": "32213e2830cd46c897e0733fa9ccd4f1"
+                    }
+                ],
+                "quizId": 14,
+                "quizType": 1,
+                "quizBgImages": [],
+                "quizItems": []
+            },
+            {
+                "quizFgImages": [
+                    {
+                        "mediaUrl": "http://rc.fastschool.cn/fs/activity/pro/media/image/d53241cf31cb4e89860b26b7e7a3d6cc.png",
+                        "mediaLid": "d53241cf31cb4e89860b26b7e7a3d6cc"
+                    }
+                ],
+                "quizId": 15,
+                "quizType": 1,
+                "quizBgImages": [],
+                "quizItems": []
+            },
+            {
+                "quizFgImages": [
+                    {
+                        "mediaUrl": "http://rc.fastschool.cn/fs/activity/pro/media/image/4ccb367bf58443cf88fe7a5ef617ad91.png",
+                        "mediaLid": "4ccb367bf58443cf88fe7a5ef617ad91"
+                    }
+                ],
+                "quizId": 16,
+                "quizType": 1,
+                "quizBgImages": [],
+                "quizItems": []
+            },
+            {
+                "quizFgImages": [
+                    {
+                        "mediaUrl": "http://rc.fastschool.cn/fs/activity/pro/media/image/bb999e7f66c8445f812a8eca8962771f.png",
+                        "mediaLid": "bb999e7f66c8445f812a8eca8962771f"
+                    }
+                ],
+                "quizId": 17,
+                "quizType": 1,
+                "quizBgImages": [],
+                "quizItems": []
+            },
+            {
+                "quizFgImages": [
+                    {
+                        "mediaUrl": "http://rc.fastschool.cn/fs/activity/pro/media/image/f0303f144cb4410e99ab78d07187418e.png",
+                        "mediaLid": "f0303f144cb4410e99ab78d07187418e"
+                    }
+                ],
+                "quizId": 18,
+                "quizType": 1,
+                "quizBgImages": [],
+                "quizItems": []
+            }
+        ],
+        "coursewareName": "测试课件"
+    },
+    "requestDateTime": 1552731840783,
+    "requestId": "581b2d22b9d0498faccc1315f4788c5e",
+    "responseDateTime": 1552731841044,
+    "statusCode": 200,
+    "statusText": "OK"
+}

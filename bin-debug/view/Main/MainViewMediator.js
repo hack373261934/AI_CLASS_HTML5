@@ -291,4 +291,3 @@ var ui;
     ui.MainViewMediator = MainViewMediator;
     __reflect(MainViewMediator.prototype, "ui.MainViewMediator");
 })(ui || (ui = {}));
-//# sourceMappingURL=MainViewMediator.js.map

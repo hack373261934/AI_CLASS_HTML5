@@ -11,4 +11,3 @@ var GameEventConstant = (function () {
     return GameEventConstant;
 }());
 __reflect(GameEventConstant.prototype, "GameEventConstant");
-//# sourceMappingURL=GameEventConstant.js.map

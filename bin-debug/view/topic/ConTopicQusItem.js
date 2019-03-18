@@ -36,4 +36,3 @@ var ConTopicQusItem = (function (_super) {
     return ConTopicQusItem;
 }(eui.Component));
 __reflect(ConTopicQusItem.prototype, "ConTopicQusItem", ["eui.UIComponent", "egret.DisplayObject"]);
-//# sourceMappingURL=ConTopicQusItem.js.map

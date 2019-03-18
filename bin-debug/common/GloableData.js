@@ -18,7 +18,7 @@ var GloableData = (function () {
     *方便执行同步环境下的逻辑
     *默认为true=真机调试  false=本地调试
     */
-    GloableData.isDebug = false;
+    GloableData.isDebug = true;
     /*
     *课件数据
     */
@@ -50,4 +50,3 @@ var EventData;
         eventID[eventID["active"] = 20007] = "active";
     })(eventID = EventData.eventID || (EventData.eventID = {}));
 })(EventData || (EventData = {}));
-//# sourceMappingURL=GloableData.js.map

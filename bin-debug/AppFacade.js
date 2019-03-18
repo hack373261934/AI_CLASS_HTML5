@@ -38,4 +38,3 @@ var AppFacade = (function () {
     return AppFacade;
 }());
 __reflect(AppFacade.prototype, "AppFacade");
-//# sourceMappingURL=AppFacade.js.map
